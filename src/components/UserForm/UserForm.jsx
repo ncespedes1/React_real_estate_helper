@@ -4,14 +4,13 @@ import './UserForm.css'
 // import { CircularProgress } from '@mui/material'
 import { useTheme } from '../../contexts/ThemeContext';
 
-const UserForm = ({ submitFunction }) => {
+const UserForm = ({ submitFunction, onSuccessRedirect }) => {
 
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
         email: '',
         password: '',
-        role: '',
     })
 
     const [loading, setLoading] = useState(false)
@@ -34,6 +33,7 @@ const UserForm = ({ submitFunction }) => {
         setLoading(false)
         if (sentInfo){
             setSuccess(true)
+            onSuccessRedirect()
         } else {
             setError(true)
         }
@@ -64,13 +64,13 @@ const UserForm = ({ submitFunction }) => {
         <h2>Please fill out the form below</h2>
 
         <div>
-            <label htmlFor="firstname">First name: </label>
-            <input type="firstname" name='firstname' placeholder='firstname' onChange={(e)=>handleChange(e)} value={formData.first_name} required/>
+            <label htmlFor="first_name">First name: </label>
+            <input name='first_name' placeholder='Firstname' onChange={(e)=>handleChange(e)} value={formData.first_name} required/>
         </div>
 
         <div>
-            <label htmlFor="lastname">Last name:</label>
-            <input type="lastname" name='lastname' placeholder='lastname' onChange={(e)=>handleChange(e)} value={formData.last_name} required/>
+            <label htmlFor="last_name">Last name:</label>
+            <input name='last_name' placeholder='Lastname' onChange={(e)=>handleChange(e)} value={formData.last_name} required/>
         </div>
 
         <div>

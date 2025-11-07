@@ -1,5 +1,7 @@
 import React from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import SearchBar from '../components/SearchBar/SearchBar'
+
 
 const HomeView = () => {
 
@@ -10,9 +12,11 @@ const HomeView = () => {
       
       <div className='welcome'>
         {isAuthenticated &&
-                <h2>Welcome {user.first_name} {user.last_name}!</h2>
-                }
+          <h2>Welcome {user.first_name} {user.last_name}!</h2>
+          }
       </div>
+      <SearchBar/>
+
     </div>
   )
 }

@@ -40,28 +40,5 @@ nav a:hover{
     color: rgb(214, 196, 144);
 }
 
-#searchForm{
-    display: flex;
-    align-self: center;
-}
 
-#searchForm input{
-    border-radius: 8px 0 0 8px;
-    height: 2.2em;
-    /* width: 15vw; */
-    padding: 0 1.2em;
-
-    border: none;
-}
-.search-button {
-  border-radius: 0 8px 8px 0;
-  height: 2.2em;
-  padding: 0 1.2em;
-  /* font-size: 1em; */
-  cursor: pointer;
-  transition: border-color 0.25s;
-
-  background-color: var(--default-button-color);
-  border: none;
-}
 

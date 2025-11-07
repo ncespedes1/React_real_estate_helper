@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) =>{
 
     //======================functions========================
 
-    const login = async (ElementInternals, password) =>{
+    const login = async (email, password) =>{
         const response = await fetch('https://real-estate-helper-api.onrender.com/users/login',{
             method: 'POST',
             headers: {
@@ -39,9 +39,9 @@ export const AuthProvider = ({ children }) =>{
         if (response.status == 200){
 
             const loginData = await response.json()
-
+            
             setToken(loginData.token)
-            setUser(login.user)
+            setUser(loginData.user)
             localStorage.setItem('token', loginData.token)
             localStorage.setItem('user', JSON.stringify(loginData.user))
 
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) =>{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer' + token
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(updateData)
         })
@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }) =>{
             body: JSON.stringify(registerData)
         })
 
-        if (response.status == 200){
+        if (response.status == 201){
             const responseData = await response.json()
             console.log(responseData)
 

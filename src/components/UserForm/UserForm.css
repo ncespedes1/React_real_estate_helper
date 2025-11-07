@@ -17,6 +17,10 @@
     margin: 10px;
 }
 
+.userForm h2{
+    margin-bottom: 12px;
+}
+
 .userForm label{
     display: none;
 }

@@ -21,10 +21,6 @@ const NavBar = () => {
     <header className={darkMode ? 'mainDark' : 'mainLight'}>
         <nav>
             <h1 id='title'>Real Estate Helper</h1>  
-            <form id="searchForm">
-                <input type="text" placeholder="Enter county name" className="search-input"/>
-                <button type="submit" className="search-button">Search</button>
-            </form>
             <ul>
                 <NavLink to='/'>HOME</NavLink>
                 {isAuthenticated ? 
