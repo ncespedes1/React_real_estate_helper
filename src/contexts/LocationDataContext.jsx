@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { data } from 'react-router-dom';
 
 const LocationDataContext = createContext();
 
@@ -54,17 +55,28 @@ export const LocationDataProvider = ({ children }) => {
             setTempCountyNameMap({
                 fips_id: fips_id,
                 county_name: county_name})
+            setTempCountyData(countyData)
             return countyData
         } else {
             console.log('Error getting county data')
         }
     }
 
+    const getFormattedData = (data) => {
+        return data.map(item => ({
+            ...item,
+            info_date: new Date(item.info_date)
+        })).reverse();
+    }
+
+
     const value = {
         allCountyNames,
         tempCountyNameMap,
+        tempCountyData,
         getCountyNames,
         getCountyData,
+        getFormattedData
         
     }
 

@@ -1,0 +1,13 @@
+.countyDataContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+
+    border: 2px solid white;
+
+    color: var(--text-color);
+}
+
+.countyDataSettings {
+    border: 2px solid white;
+}
