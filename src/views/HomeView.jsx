@@ -1,22 +1,24 @@
 import React from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import SearchBar from '../components/SearchBar/SearchBar'
+import { useLocationData } from '../contexts/LocationDataContext';
 
 
 const HomeView = () => {
 
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();  // use for list later
+  const {tempCountyNameMap} = useLocationData();
+
 
   return (
     <div>
-      
-      <div className='welcome'>
-        {isAuthenticated &&
-          <h2>Welcome {user.first_name} {user.last_name}!</h2>
-          }
-      </div>
       <SearchBar/>
-
+      {tempCountyNameMap &&
+        <div>
+          <h2>{tempCountyNameMap.county_name} (FIPS: {tempCountyNameMap.fips_id})</h2>
+          {isAuthenticated ? 'clickable heart' : 'blank heart'}
+        </div>
+      }
     </div>
   )
 }

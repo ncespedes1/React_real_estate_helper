@@ -1,0 +1,78 @@
+.profile-card{
+    border-radius: 15px;
+    place-self: center;
+    width: 35vw;
+    margin: 15px;
+
+    color: var(--text-color);
+}
+
+.profile-name{
+    padding: 30px 0 10px;
+    text-align: center;
+
+    background: var(--secondary-color);
+    /* color: var(--text-color); */
+    border-radius: 15px 15px 0 0 ;
+}
+
+.profile-list{
+    padding-top: 15px;
+    width: 28vw;
+    align-self: center;
+}
+
+/* .profile-card p{
+    margin: 5px;
+    width: 28vw;
+
+    text-align: start;
+    align-self: center;
+} */
+
+.profile-card button{
+    margin: 20px 0 15px 0;
+    width: 20vw;
+    height: 2.2em;
+    padding: 0 1.2em;
+
+    border-radius: 6px;
+}
+
+.profile-buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 15px 0 15px 0;
+}
+
+.update-button{
+    border: 1px solid var(--title-color);
+    color: var(--title-color);
+    background: var(--primary-bg);
+}
+
+.delete-button{
+    border: 1px solid rgb(230, 97, 97);
+    color: rgb(200, 80, 80);
+    background: var(--primary-bg);
+}
+
+.update-button:hover {
+  
+  color: var(--title-color);
+  background: var(--primary-bg);
+  border: 2px solid var(--title-color);
+  
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.delete-button:hover {
+
+  color: red;
+  background: var(--primary-bg);
+  border: 2px solid red;
+  filter: drop-shadow(0 0 2em #fb6197aa);
+}
