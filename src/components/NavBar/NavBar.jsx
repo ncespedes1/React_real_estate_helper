@@ -26,7 +26,7 @@ const NavBar = () => {
                 <h2>Welcome {user.first_name} {user.last_name}!</h2>
                 }
             </div>
-            <ul>
+            <ul className='navLinks'>
                 <NavLink to='/'>HOME</NavLink>
                 {isAuthenticated ? 
                 <>

@@ -19,12 +19,6 @@
     border: none;
 } */
 
-.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  /* width: 300px;
-  margin-right: 10px; */
-  border-color: var(--text-color);
-}
-
 .search-button {
   /* border-radius: 0 8px 8px 0; */
   height: 2.2em;
@@ -38,12 +32,4 @@
 }
 
 
-/* trying to figure out autocomplete direction below */
-.input-autocomplete .MuiAutocomplete-listbox {
-  display: flex !important;
-  flex-direction: column !important;
-}
 
-/* .input-autocomplete .MuiAutocomplete-listbox li {
-  display: block !important
-} */

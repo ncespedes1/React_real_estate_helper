@@ -21,7 +21,7 @@ h1 {
   color: rgb(219, 213, 184);
 }
 
-ul{
+.navLinks{
     /* padding-bottom: 25px; */
 
     display: flex;

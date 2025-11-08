@@ -67,10 +67,10 @@ const SearchBar = () => {
         <form className="searchForm" onSubmit={(e) => handleSubmit(e)}>
 
         <Autocomplete className="input-autocomplete"
+            
             // freeSolo
             id="search-auto-complete"
             disableClearable
-            disablePortal
             sx={{ width: 300}}
             options={allCountyNames}
             getOptionLabel={(option) => option.county_name}

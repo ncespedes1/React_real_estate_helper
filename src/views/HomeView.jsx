@@ -11,15 +11,33 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 import './HomeView.css'
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon  from '@mui/icons-material/FavoriteBorder'
 
 const HomeView = () => {
 
   const { user, isAuthenticated } = useAuth();
-  const {tempCountyNameMap, tempCountyData, getFormattedData} = useLocationData();
-
+  const {tempCountyNameMap, tempCountyData, getFormattedData, compareCountyList, assignCompareCounty, removeCompareCounty, checkFavorited} = useLocationData();
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+  }
+
+  const handleToggleFavorite = () => {
+    if (!isAuthenticated) {
+      alert('Please log in to manage favorites.');
+      return;
+    }
+    if (!checkFavorited(tempCountyNameMap.fips_id)) {
+      if (compareCountyList.length >= 3) {
+        alert('You can only compare up to 3 counties.');
+        return;
+      }
+      assignCompareCounty(tempCountyNameMap.fips_id, tempCountyNameMap.county_name);
+    } else {
+      removeCompareCounty(tempCountyNameMap.fips_id, tempCountyNameMap.county_name);
+    }
   }
 
   const availableMetrics = [
@@ -39,8 +57,13 @@ const HomeView = () => {
       <SearchBar/>
       {tempCountyNameMap &&
         <div>
+        
           <h2>{tempCountyNameMap.county_name} (FIPS: {tempCountyNameMap.fips_id})</h2>
-          {isAuthenticated ? 'clickable heart' : 'blank heart'}
+          
+          <IconButton onClick={handleToggleFavorite} color='red' >
+            {checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
+          
 
           <div className='countyDataContainer'>
             
@@ -61,7 +84,12 @@ const HomeView = () => {
             <div className='countyDataGraphs'>
               <LineChart
               dataset={getFormattedData(tempCountyData)}
-                xAxis={[{ dataKey: 'info_date', scaleType: 'time' }]}
+                xAxis={[{ 
+                  dataKey: 'info_date',
+                  scaleType: 'time',
+                  valueFormatter: (date) => date.toLocaleDateString(),
+
+                   }]}
                 series={[
                   {
                     dataKey: selectedValue,
