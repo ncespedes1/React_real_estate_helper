@@ -5,14 +5,19 @@
 }
 
 .mainDark{
-  --primary-color: #2a5572;
-  --secondary-color: #5e8eaa;
+  --primary-color: #1f4daf;
+  --secondary-color: #0cb4d1;
+  /* --primary-color: #af1fa3;
+  --secondary-color: #d10c68; */
+
+  --object-primary-bg-color: rgb(12, 180, 209);
+  --object-secondary-bg-color: #0cb4d1;
 
   --highlight-color: #96d7e8;
   --accent-color: #eba346;
 
-  --primary-bg: #17425f;
-  --secondary-bg: #07293f;
+  --primary-bg: #1a226d;
+  --secondary-bg: #08073f;
 
   --title-color: #8adffe;
   --text-color: #ffffff;

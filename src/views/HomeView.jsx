@@ -59,17 +59,17 @@ const HomeView = () => {
       <SearchBar/>
       {tempCountyNameMap &&
         <div>
-        
-          <h2>{tempCountyNameMap.county_name} (FIPS: {tempCountyNameMap.fips_id})</h2>
-          
-          <IconButton onClick={handleToggleFavorite} color='red' >
-            {checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </IconButton>
-          
+          <div className='soloCountyHeader'>
+            <h2>{tempCountyNameMap.county_name} (FIPS: {tempCountyNameMap.fips_id})</h2>
+            
+            <IconButton onClick={handleToggleFavorite} color='red' >
+              {checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            </IconButton>
+          </div>
 
           <div className='countyDataContainer'>
-            
-            <FormControl className='countyDataSettings'>
+            <div className='countyDataSettings'>
+            <FormControl>
               <FormLabel id="demo-radio-buttons-group-label">County Metric:</FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
@@ -82,6 +82,7 @@ const HomeView = () => {
                 ))}
               </RadioGroup>
             </FormControl>
+            </div>
 
             <div className='countyDataGraphs'>
               <LineChart

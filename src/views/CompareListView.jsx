@@ -37,7 +37,7 @@ const CompareListView = () => {
 
   const [selectedValue, setSelectedValue] = useState(availableMetrics[0].value);
 
-  // ==============TESTING AREA=================
+  // ==============MULTILINE GRAPH AREA=================
 
   const mergedDataset = useMemo(() => {
     const result = [];
@@ -80,8 +80,8 @@ const CompareListView = () => {
   return (
     <div>
       <div className='countyDataContainer'>
-            
-        <FormControl className='countyDataSettings'>
+        <div className='countyDataSettings'>
+        <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">County Metric:</FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
@@ -94,6 +94,7 @@ const CompareListView = () => {
             ))}
           </RadioGroup>
         </FormControl>
+        </div>
 
         <div className='countyDataGraphs'>
 
@@ -111,7 +112,7 @@ const CompareListView = () => {
           />
 
           {Array.from(favoritesData.entries()).map(([fips_id, data]) => (
-            <div key={fips_id}>
+            <div key={fips_id} className='individualCountyChart'>
 
               <LineChart 
               dataset={getFormattedData(data)}

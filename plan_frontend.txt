@@ -1,6 +1,3 @@
 frontend:
-- add routing network
-- create placeholder views (home, login, profile page, compare page, 'collection' crud)
-- navbar
 - authcontect and login
 -change darkmode from navbar to app level
