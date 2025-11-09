@@ -17,7 +17,7 @@ export const LocationDataProvider = ({ children }) => {
     const [tempCountyNameMap, setTempCountyNameMap] = useState(null) //mapping of fips to county name
     const [tempCountyData, setTempCountyData] = useState(null) //full county data for selected county   
     const [compareCountyList, setCompareCountyList] = useState([]) //list of counties (max 3) to compare
-    
+    const [favoritesData, setFavoritesData] = useState(new Map()) //full data of favorited counties
 
     useEffect(() => {
         getCountyNames()
@@ -61,18 +61,25 @@ export const LocationDataProvider = ({ children }) => {
             const compareCountiesData = await response.json()
             console.log(compareCountiesData)
             setCompareCountyList(compareCountiesData)
+            getFavoritesData(compareCountiesData)
         }
     }
 
-
-    //Getting specific county historical data by fips id
-    const getCountyData = async(fips_id, county_name) => {
+    //Helper function to fetch county data by fips id (getCountyData and getFavoriteCountyData)
+    const fetchCountyData = async(fips_id) => {
         const response = await fetch(`https://real-estate-helper-api.onrender.com/county_data/${fips_id}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         })
+        return response
+    }
+
+    //Getting specific county historical data by fips id 
+    // **this also changes the temp county name map for HomeView**
+    const getCountyData = async(fips_id, county_name) => {
+        const response = await fetchCountyData(fips_id)
 
         if (response.status == 200){
             const countyData = await response.json()
@@ -81,6 +88,20 @@ export const LocationDataProvider = ({ children }) => {
                 fips_id: fips_id,
                 county_name: county_name})
             setTempCountyData(countyData)
+            return countyData
+        } else {
+            console.log('Error getting county data')
+        }
+    }
+
+        //Getting specific county historical data by fips id 
+        // **this is only used for Favorites to avoid changing HomeView**
+    const getFavoriteCountyData = async(fips_id, county_name) => {
+        const response = await fetchCountyData(fips_id)
+
+        if (response.status == 200){
+            const countyData = await response.json()
+            console.log(countyData)
             return countyData
         } else {
             console.log('Error getting county data')
@@ -105,6 +126,11 @@ export const LocationDataProvider = ({ children }) => {
         if (response.status == 200){
             console.log(`Successfully assigned ${county_name} to compare list`)
             setCompareCountyList((prev) => [...prev, {fips_id, county_name}])
+            setFavoritesData((prev) => {
+                const newMap = new Map(prev)
+                newMap.set(fips_id, tempCountyData)
+                return newMap
+            })
             return true;
         } else {
             console.log('Error assigning compare county')
@@ -124,12 +150,35 @@ export const LocationDataProvider = ({ children }) => {
         if (response.status == 200){
             console.log(`Successfully removed ${county_name} from compare list`)
             setCompareCountyList((prev) => prev.filter(county => county.fips_id !== fips_id))
+            setFavoritesData((prev) => {
+                const newMap = new Map(prev)
+                newMap.delete(fips_id)
+                return newMap
+            })
             return true;
         } else {
             console.log('Error removing compare county')
             return false;
         }
     }
+
+    const getFavoritesData = async(list) => {
+        const promises = []
+        for (let county of list){
+            promises.push(getFavoriteCountyData(county.fips_id, county.county_name))
+        }
+        const results = await Promise.all(promises)
+        console.log(results.length)
+        for (const countyResult of results){
+            
+            setFavoritesData((prev) => {
+                const newMap = new Map(prev)
+                newMap.set(countyResult[0].fips_id, countyResult)
+                return newMap
+            })
+        }
+    }
+
 
     const checkFavorited = (fips_id) => {
         return compareCountyList.some(county => county.fips_id === fips_id);
@@ -149,6 +198,7 @@ export const LocationDataProvider = ({ children }) => {
         tempCountyNameMap,
         tempCountyData,
         compareCountyList,
+        favoritesData,
         // ----------------------functions------------------------
         // getCountyNames,
         // getFavorites,

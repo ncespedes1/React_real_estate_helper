@@ -2,18 +2,20 @@ import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import SearchBar from '../components/SearchBar/SearchBar'
 import { useLocationData } from '../contexts/LocationDataContext'
-import { LineChart } from '@mui/x-charts/LineChart'
 
+import { LineChart } from '@mui/x-charts/LineChart'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-import './HomeView.css'
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon  from '@mui/icons-material/FavoriteBorder'
+
+import './HomeView.css'
+
 
 const HomeView = () => {
 
