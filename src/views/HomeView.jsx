@@ -103,6 +103,9 @@ const HomeView = () => {
                 height={300}
                 width={800}
               />
+
+                {/* Add slider for date range */}
+                
             </div>
 
           </div>

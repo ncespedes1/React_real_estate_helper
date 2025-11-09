@@ -19,6 +19,8 @@ export const LocationDataProvider = ({ children }) => {
     const [compareCountyList, setCompareCountyList] = useState([]) //list of counties (max 3) to compare
     const [favoritesData, setFavoritesData] = useState(new Map()) //full data of favorited counties
 
+    //favorites will later be used to include metros, zips, etc. Only includes counties for now.
+
     useEffect(() => {
         getCountyNames()
         if (token){
@@ -168,7 +170,6 @@ export const LocationDataProvider = ({ children }) => {
             promises.push(getFavoriteCountyData(county.fips_id, county.county_name))
         }
         const results = await Promise.all(promises)
-        console.log(results.length)
         for (const countyResult of results){
             
             setFavoritesData((prev) => {

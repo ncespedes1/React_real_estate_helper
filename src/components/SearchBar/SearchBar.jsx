@@ -10,7 +10,7 @@ const SearchBar = () => {
 
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
-    const { allCountyNames, getCountyData} = useLocationData()
+    const { allCountyNames, getCountyData } = useLocationData()
 
 
     const handleSubmit = async (event) => {
@@ -83,6 +83,7 @@ const SearchBar = () => {
 
             inputValue={inputValue}
             onInputChange={(e, newInputValue) => setInputValue(newInputValue)}
+
         />
             <button type="submit" className="search-button">Search</button>
             

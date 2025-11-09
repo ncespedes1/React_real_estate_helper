@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useLocationData } from '../contexts/LocationDataContext'
 
@@ -22,20 +22,8 @@ const CompareListView = () => {
     setSelectedValue(event.target.value);
   }
 
-  const handleToggleFavorite = () => {
-    if (!isAuthenticated) {
-      alert('Please log in to manage favorites.');
-      return;
-    }
-    if (!checkFavorited(tempCountyNameMap.fips_id)) {
-      if (compareCountyList.length >= 3) {
-        alert('You can only compare up to 3 counties.');
-        return;
-      }
-      assignCompareCounty(tempCountyNameMap.fips_id, tempCountyNameMap.county_name);
-    } else {
-      removeCompareCounty(tempCountyNameMap.fips_id, tempCountyNameMap.county_name);
-    }
+  const removeFavorite = (fips_id) => {
+    removeCompareCounty(fips_id, compareCountyList.find(county => county.fips_id === fips_id).county_name);
   }
 
   const availableMetrics = [
@@ -49,10 +37,43 @@ const CompareListView = () => {
 
   const [selectedValue, setSelectedValue] = useState(availableMetrics[0].value);
 
-  // const xAxisData = (favoritesData && favoritesData.size > 0) ?
-    // getFormattedData(favoritesData[0]).map(item => (
-    //   item.info_date
-    // )) : [];
+  // ==============TESTING AREA=================
+
+  const mergedDataset = useMemo(() => {
+    const result = [];
+  
+    Array.from(favoritesData.entries()).forEach(([fips_id, data]) => {
+      const county = compareCountyList.find(c => c.fips_id === fips_id);
+    
+      getFormattedData(data).forEach(item => {
+        let mergedItem = result.find(d => d.info_date.getTime() === item.info_date.getTime());
+        if (!mergedItem) {
+          mergedItem = { info_date: item.info_date };
+          result.push(mergedItem);
+        }
+        mergedItem[fips_id] = item[selectedValue];
+      });
+    });
+    result.forEach(row => {
+      Array.from(favoritesData.keys()).forEach(fips_id => {
+        if (typeof row[fips_id] !== 'number') {
+          row[fips_id] = null;
+        }
+      });
+    });
+    return result;
+  }, [favoritesData, compareCountyList, getFormattedData, selectedValue]);
+
+
+  const series = useMemo(() => (
+    Array.from(favoritesData.keys()).map(fips_id => ({
+      dataKey: fips_id,
+      label: compareCountyList.find(c => c.fips_id === fips_id)?.county_name || fips_id,
+      showMark: false,
+    }))
+  ), [favoritesData, compareCountyList]);
+
+  // ==========================================
   
 
   
@@ -76,26 +97,47 @@ const CompareListView = () => {
 
         <div className='countyDataGraphs'>
 
-          {Array.from(favoritesData.entries()).map(([fips_id, data]) => (
-            <LineChart key={fips_id}
-            dataset={getFormattedData(data)}
-              xAxis={[{ 
-                dataKey: 'info_date',
-                scaleType: 'time',
-                valueFormatter: (date) => date.toLocaleDateString(),
+          <LineChart className='mergedChart'
+            dataset={mergedDataset}
+            xAxis={[{
+              dataKey: 'info_date',
+              scaleType: 'time',
+              valueFormatter: (date) => date.toLocaleDateString(),
+            }]}
+            series={series}
+            height={300}
+            width={800}
+            tooltip={{ trigger: 'axis' }}
+          />
 
-                  }]}
-              series={[
-                {
-                  dataKey: selectedValue,
-                  label: compareCountyList.find(county => county.fips_id === fips_id).county_name,
-                  color: 'blue',
-                  showMark: false,
-                },
-              ]}
-              height={300}
-              width={800}
-            />
+          {Array.from(favoritesData.entries()).map(([fips_id, data]) => (
+            <div key={fips_id}>
+
+              <LineChart 
+              dataset={getFormattedData(data)}
+                xAxis={[{ 
+                  dataKey: 'info_date',
+                  scaleType: 'time',
+                  valueFormatter: (date) => date.toLocaleDateString(),
+
+                    }]}
+                series={[
+                  {
+                    dataKey: selectedValue,
+                    label: compareCountyList.find(county => county.fips_id === fips_id).county_name,
+                    color: 'blue',
+                    showMark: false,
+                  },
+                ]}
+                height={300}
+                width={800}
+              />
+              
+              <IconButton onClick={() => removeFavorite(fips_id)} color='red' >
+                <FavoriteIcon />
+              </IconButton>
+              
+            </div>
             ))}
         </div>
       </div>
