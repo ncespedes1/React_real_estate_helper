@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useLocationData } from '../../contexts/LocationDataContext'
 import './SearchBar.css'
 import { Autocomplete, createFilterOptions, Stack, TextField } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar = () => {
 
@@ -66,26 +67,26 @@ const SearchBar = () => {
     <div>
         <form className="searchForm" onSubmit={(e) => handleSubmit(e)}>
 
-        <Autocomplete className="input-autocomplete"
-            
-            // freeSolo
-            id="search-auto-complete"
-            disableClearable
-            sx={{ width: 300}}
-            options={allCountyNames}
-            getOptionLabel={(option) => option.county_name}
-            getOptionKey={(option) => option.fips_id}
-            filterOptions={filterOptions}
-            renderInput={(params) => <TextField {...params} label="County Name" />}
+            <Autocomplete className="input-autocomplete"
+                
+                // freeSolo
+                id="search-auto-complete"
+                disableClearable
+                sx={{ width: 300}}
+                options={allCountyNames}
+                getOptionLabel={(option) => option.county_name}
+                getOptionKey={(option) => option.fips_id}
+                filterOptions={filterOptions}
+                renderInput={(params) => <TextField {...params} label="County Name" />}
 
-            value={county}
-            onChange={(e, newCounty) => setCounty(newCounty)}
+                value={county}
+                onChange={(e, newCounty) => setCounty(newCounty)}
 
-            inputValue={inputValue}
-            onInputChange={(e, newInputValue) => setInputValue(newInputValue)}
+                inputValue={inputValue}
+                onInputChange={(e, newInputValue) => setInputValue(newInputValue)}
 
-        />
-            <button type="submit" className="search-button">Search</button>
+            />
+            <button type="submit" className="search-button"><SearchIcon/></button>
             
         </form>
        

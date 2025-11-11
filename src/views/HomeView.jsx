@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import SearchBar from '../components/SearchBar/SearchBar'
 import { useLocationData } from '../contexts/LocationDataContext'
+import { useTheme } from '../contexts/ThemeContext'
 
 import { LineChart } from '@mui/x-charts/LineChart'
 import Radio from '@mui/material/Radio';
@@ -13,6 +14,7 @@ import FormLabel from '@mui/material/FormLabel';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon  from '@mui/icons-material/FavoriteBorder'
+import { axisClasses } from '@mui/x-charts'
 
 import './HomeView.css'
 
@@ -21,6 +23,7 @@ const HomeView = () => {
 
   const { user, isAuthenticated } = useAuth();
   const {tempCountyNameMap, tempCountyData, getFormattedData, compareCountyList, assignCompareCounty, removeCompareCounty, checkFavorited} = useLocationData();
+  const { darkMode, toggleTheme } = useTheme();
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -85,28 +88,46 @@ const HomeView = () => {
             </div>
 
             <div className='countyDataGraphs'>
-              <LineChart
-              dataset={getFormattedData(tempCountyData)}
-                xAxis={[{ 
-                  dataKey: 'info_date',
-                  scaleType: 'time',
-                  valueFormatter: (date) => date.toLocaleDateString(),
+              <div className='individualCountyChart'>
+                <LineChart
+                dataset={getFormattedData(tempCountyData)}
+                  xAxis={[{ 
+                    dataKey: 'info_date',
+                    scaleType: 'time',
+                    valueFormatter: (date) => date.toLocaleDateString(),
 
-                   }]}
-                series={[
-                  {
-                    dataKey: selectedValue,
-                    label: availableMetrics.find(option => option.value === selectedValue)?.label,
-                    color: 'blue',
-                    showMark: false,
-                  },
-                ]}
-                height={300}
-                width={800}
-              />
+                    }]}
+                  series={[
+                    {
+                      dataKey: selectedValue,
+                      label: availableMetrics.find(option => option.value === selectedValue)?.label,
+                      color: 'blue',
+                      showMark: false,
+                    },
+                  ]}
+                  sx={{
+                    [`& .${axisClasses.tickLabel}`]: {
+                      fill: darkMode ? '#ffffff' : '#000000',
+                    },
+                    [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
+                      stroke: darkMode ? '#bbbbbbff' : '#000000', 
+                    }
+                  }}
 
-                {/* Add slider for date range */}
-                
+                  slotProps={{
+                    legend: {
+                      sx: {
+                        color: darkMode ? '#ffffff' : '#000000',
+                      },
+                    },
+                  }}
+
+                  height={300}
+                  width={800}
+                />
+
+                  {/* Add slider for date range */}
+              </div>
             </div>
 
           </div>

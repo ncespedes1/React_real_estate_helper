@@ -2,23 +2,30 @@ header{
     padding: 0;
     margin: 0;
     min-width: 1280px;
-    background: rgb(33, 49, 78);
-
+    background: var(--navbar-bg);
+    
     margin-bottom: 25px;
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+.welcomeName{
+    font-weight: normal;
+    
+}
+
 nav{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 15px;
+    color: var(--navbar-text);
 }
 
 h1 {
   /* font-size: 3.2em;
   line-height: 1.1; */
-  color: rgb(219, 213, 184);
+  color: var(--title-color);
 }
 
 .navLinks{

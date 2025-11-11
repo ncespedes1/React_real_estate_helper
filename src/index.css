@@ -18,31 +18,38 @@
 
   --primary-bg: #1a226d;
   --secondary-bg: #08073f;
+  --navbar-bg: rgb(5, 26, 66);
+  --navbar-text: #dcdcf7;
 
-  --title-color: #8adffe;
+  --title-color: #61e4fc;
   --text-color: #ffffff;
   --neutral-glow: #67bcedaa;
 
-  --input-bg: rgb(97, 131, 158);
+  --graph-bg: rgba(29, 82, 179, 0.4);
 
   --default-button-color: rgb(255, 166, 0);
 }
 
 .mainLight{
-  --primary-color: #1d577d;
-  --secondary-color: #7abce4;
+  --primary-color: #d8e8f1;
+  --secondary-color: #a5d1ee;
+
+  --object-primary-bg-color: rgb(12, 180, 209);
+  --object-secondary-bg-color: #0cb4d1;
 
   --highlight-color: #ced5db;
   --accent-color: #c3288d;
 
   --primary-bg: #f0f4f7;
   --secondary-bg: #92caf1;
+  --navbar-bg: rgb(5, 26, 66);
+  --navbar-text: #dcdcf7;
 
-  --title-color: #204972;
+  --title-color: #0dcef0;
   --text-color: #333333;
   --neutral-glow: #a5d4fbaa;
 
-  --input-bg: rgb(196, 222, 243);
+  --graph-bg: rgba(255, 255, 255, 0.4);
 
   --default-button-color: rgb(255, 166, 0);
 }

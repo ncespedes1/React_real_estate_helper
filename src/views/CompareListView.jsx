@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useLocationData } from '../contexts/LocationDataContext'
+import { useTheme } from '../contexts/ThemeContext'
+import ThemeSwitch from '../components/ThemeSwitch'
 
 import { LineChart } from '@mui/x-charts/LineChart'
 import Radio from '@mui/material/Radio';
@@ -12,11 +14,13 @@ import FormLabel from '@mui/material/FormLabel';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon  from '@mui/icons-material/FavoriteBorder'
+import { axisClasses } from '@mui/x-charts'
 
 const CompareListView = () => {
 
   const { user, isAuthenticated } = useAuth();
   const {tempCountyNameMap, tempCountyData, getFormattedData, compareCountyList, assignCompareCounty, removeCompareCounty, checkFavorited, favoritesData } = useLocationData();
+  const { darkMode, toggleTheme } = useTheme();
  
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -73,6 +77,8 @@ const CompareListView = () => {
     }))
   ), [favoritesData, compareCountyList]);
 
+
+  // {darkMode ? 'blue' : 'red'},
   // ==========================================
   
 
@@ -94,22 +100,46 @@ const CompareListView = () => {
             ))}
           </RadioGroup>
         </FormControl>
+        
         </div>
+        
 
         <div className='countyDataGraphs'>
+          <div className='mergedChart'>
+            <LineChart 
+              dataset={mergedDataset}
+              xAxis={[{
+                dataKey: 'info_date',
+                scaleType: 'time',
+                valueFormatter: (date) => date.toLocaleDateString(),
+              }]}
+              series={series}
+              sx={() => ({
 
-          <LineChart className='mergedChart'
-            dataset={mergedDataset}
-            xAxis={[{
-              dataKey: 'info_date',
-              scaleType: 'time',
-              valueFormatter: (date) => date.toLocaleDateString(),
-            }]}
-            series={series}
-            height={300}
-            width={800}
-            tooltip={{ trigger: 'axis' }}
-          />
+                [`& .${axisClasses.tickLabel}`]: {
+                  fill: darkMode ? '#ffffff' : '#000000',
+                },
+                [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
+                  stroke: darkMode ? '#bbbbbbff' : '#000000', 
+                }
+                
+              })}
+
+              
+              slotProps={{
+                legend: {
+                  sx: {
+                    color: darkMode ? '#ffffff' : '#000000',
+                  },
+                },
+              }}
+
+              height={300}
+              width={800}
+              tooltip={{ trigger: 'axis' }}
+            />
+          </div>
+          
 
           {Array.from(favoritesData.entries()).map(([fips_id, data]) => (
             <div key={fips_id} className='individualCountyChart'>
@@ -126,10 +156,27 @@ const CompareListView = () => {
                   {
                     dataKey: selectedValue,
                     label: compareCountyList.find(county => county.fips_id === fips_id).county_name,
-                    color: 'blue',
+                    color: darkMode ? '#00e1ff' : 'blue',
                     showMark: false,
                   },
                 ]}
+                sx={() => ({
+                  [`& .${axisClasses.tickLabel}`]: {
+                    fill: darkMode ? '#ffffff' : '#000000',
+                  },
+                  [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
+                    stroke: darkMode ? '#bbbbbbff' : '#000000', 
+                  }
+                })}
+
+                slotProps={{
+                  legend: {
+                    sx: {
+                      color: darkMode ? '#ffffff' : '#000000',
+                    },
+                  },
+                }}
+                
                 height={300}
                 width={800}
               />
@@ -140,6 +187,10 @@ const CompareListView = () => {
               
             </div>
             ))}
+          
+        </div>
+        <div>
+          <p>Up to 3 counties can be Favorited at a time</p>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
 }
 
 
-/* TESTING */
+/* GRAPH TESTING */
 
 
 .countyDataContainer {
@@ -24,7 +24,7 @@
   position: sticky;
   top: 0;
 
-  padding: 14px 10px;
+  padding: 20px 10px;
 
 }
 
@@ -33,29 +33,21 @@
   padding: 6px;
 }
 
+.mergedChart{
+  border-radius: 8px;
+  margin: 14px 8px;
+  padding: 6px;
+  background-color: var(--graph-bg);
+  
+}
+
 .individualCountyChart {
-  /* border: 2px solid rgb(108, 142, 235); */
   border-radius: 8px;
   display: flex; /* due to heart icon */
   
   margin: 14px 8px;
   padding: 6px;
-  background-color: rgba(29, 82, 179, 0.4);
+  background-color: var(--graph-bg);
   /* background-image: linear-gradient(to bottom, var(--object-primary-bg-color), var(--object-secondary-bg-color)); */
 }
 
-.individualCountyChart .MuiLineElement-root {
-  stroke: #00e1ff;
-  stroke-width: 3px;
-}
-
-.individualCountyChart .MuiLineElement-line {
-  stroke: #0000ff; /* Change the axis line color to blue */
-  stroke-dasharray: 5, 5; /* Make axis lines dashed */
-}
-
-.individualCountyChart .MuiChartsAxis-tickLabel {
-  fill: #008000; /* Change axis label color to green */
-  font-size: 14px;
-  font-weight: bold;
-}

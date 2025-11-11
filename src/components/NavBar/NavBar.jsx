@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import ThemeSwitch from '../ThemeSwitch';
 import './NavBar.css'
 
 const NavBar = () => {
@@ -23,7 +24,7 @@ const NavBar = () => {
             <h1 id='title'>Real Estate Helper</h1>  
             <div className='welcome'>
                 {isAuthenticated &&
-                <h2>Welcome {user.first_name} {user.last_name}!</h2>
+                <h2 className='welcomeName'>Welcome {user.first_name} {user.last_name}!</h2>
                 }
             </div>
             <ul className='navLinks'>
@@ -41,7 +42,7 @@ const NavBar = () => {
                 
                 </>
                 }
-                {/* <ThemeSwitch onClick={toggleTheme}/> */}
+                <ThemeSwitch onClick={toggleTheme}/>
             </ul>
         </nav>
     </header>
