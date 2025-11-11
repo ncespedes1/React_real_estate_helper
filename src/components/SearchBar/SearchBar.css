@@ -1,9 +1,9 @@
 .searchForm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    color: var(--text-color);
+  color: var(--text-color);
 }
 
 .searchForm *{
@@ -33,8 +33,8 @@
 }
 
 .search-button {
-  /* border-radius: 0 8px 8px 0; */
-  height: 2.5em;
+  border-radius: 0 8px 8px 0;
+  height: 4.2em;
   padding: 0 1.2em;
   
   cursor: pointer;
@@ -44,5 +44,9 @@
   border: none;
 }
 
+.loading-txt{
+  padding-top: 14px;
+  justify-self: center
+}
 
 

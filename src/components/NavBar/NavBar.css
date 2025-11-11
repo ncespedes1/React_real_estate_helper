@@ -39,7 +39,7 @@ h1 {
 
 nav a{
     text-decoration: none;
-    color: rgb(220, 220, 247);
+    color: var(--navbar-text);
 }
 
 

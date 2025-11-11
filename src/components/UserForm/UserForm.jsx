@@ -65,22 +65,22 @@ const UserForm = ({ submitFunction, onSuccessRedirect }) => {
 
         <div>
             <label htmlFor="first_name">First name: </label>
-            <input name='first_name' placeholder='Firstname' onChange={(e)=>handleChange(e)} value={formData.first_name} required/>
+            <input name='first_name' placeholder='First name' onChange={(e)=>handleChange(e)} value={formData.first_name} required/>
         </div>
 
         <div>
             <label htmlFor="last_name">Last name:</label>
-            <input name='last_name' placeholder='Lastname' onChange={(e)=>handleChange(e)} value={formData.last_name} required/>
+            <input name='last_name' placeholder='Last name' onChange={(e)=>handleChange(e)} value={formData.last_name} required/>
         </div>
 
         <div>
             <label htmlFor="email">Email:</label>
-            <input type="email" name='email' placeholder='email' onChange={(e)=>handleChange(e)} value={formData.email} required/>
+            <input type="email" name='email' placeholder='Email' onChange={(e)=>handleChange(e)} value={formData.email} required/>
         </div>
 
         <div>
             <label htmlFor="password">Password:</label>
-            <input type="password" name='password' placeholder='password' onChange={(e)=>handleChange(e)} value={formData.password} required/>
+            <input type="password" name='password' placeholder='Password' onChange={(e)=>handleChange(e)} value={formData.password} required/>
         </div>
 
         {/* <div>

@@ -12,24 +12,34 @@
   align-items: center;
   margin-top: 20px;
 
-  border: 2px solid white;
+  /* border: 2px solid white; */
 
-  color: var(--text-color);
+  /* color: var(--text-color); */
 }
 
 .countyDataSettings {
   align-self: start;
   background-image: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
   
+  height: 80vh;
+  min-width: fit-content;
+
   position: sticky;
-  top: 0;
+  top: 18px;
 
   padding: 20px 10px;
 
+  color: var(--text-color);
+
+}
+
+.homeCountyDataGraph{
+  padding: 6px;
+  align-self: start;
 }
 
 .countyDataGraphs {
-  border: 2px solid white;
+  /* border: 2px solid white; */
   padding: 6px;
 }
 

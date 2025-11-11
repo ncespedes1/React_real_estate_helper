@@ -62,18 +62,20 @@ const HomeView = () => {
       <SearchBar/>
       {tempCountyNameMap &&
         <div>
-          <div className='soloCountyHeader'>
-            <h2>{tempCountyNameMap.county_name} (FIPS: {tempCountyNameMap.fips_id})</h2>
-            
-            <IconButton onClick={handleToggleFavorite} color='red' >
-              {checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            </IconButton>
-          </div>
+          
 
           <div className='countyDataContainer'>
             <div className='countyDataSettings'>
             <FormControl>
-              <FormLabel id="demo-radio-buttons-group-label">County Metric:</FormLabel>
+              <FormLabel 
+              id="demo-radio-buttons-group-label"
+              sx={{ 
+                color: darkMode ? '#ffffff' : '#000000', 
+                "&.Mui-focused": {
+                  color: darkMode ? '#ffffff' : '#000000', 
+                },
+                }}>
+                County Metric:</FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 name="radio-buttons-group"
@@ -81,13 +83,35 @@ const HomeView = () => {
                 onChange={handleChange}
               >
                 {availableMetrics.map((metric) => (
-                  <FormControlLabel key={metric.value} value={metric.value} control={<Radio />} label={metric.label} />
+                  <FormControlLabel 
+                  key={metric.value} 
+                  value={metric.value} 
+                  // control={<Radio />} 
+                  label={metric.label}
+                  control={
+                    <Radio
+                      sx={{
+                        color: 'var(--text-color)', // Unchecked color
+                        '&.Mui-checked': {
+                          color: 'orange', // Checked color
+                        },
+                      }}
+                    />
+                  } />
                 ))}
               </RadioGroup>
             </FormControl>
             </div>
 
-            <div className='countyDataGraphs'>
+            <div className='homeCountyDataGraph'>
+              <div className='soloCountyHeader'>
+                  <h2> {tempCountyNameMap.county_name} </h2>
+                  <p> (FIPS: {tempCountyNameMap.fips_id}) </p>
+                  <IconButton onClick={handleToggleFavorite} className='favoriteBtn'>
+                    {checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/> : <FavoriteBorderIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/>}
+                  </IconButton>
+                </div>
+
               <div className='individualCountyChart'>
                 <LineChart
                 dataset={getFormattedData(tempCountyData)}
@@ -101,18 +125,34 @@ const HomeView = () => {
                     {
                       dataKey: selectedValue,
                       label: availableMetrics.find(option => option.value === selectedValue)?.label,
-                      color: 'blue',
+                      color: darkMode ? '#00e1ff' : 'blue',
                       showMark: false,
                     },
                   ]}
+                  // sx={{
+                  //   [`& .${axisClasses.tickLabel}`]: {
+                  //     fill: darkMode ? '#ffffff' : '#000000',
+                  //   },
+                  //   [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
+                  //     stroke: darkMode ? '#bbbbbbff' : '#000000', 
+                  //   }
+                  // }}
                   sx={{
-                    [`& .${axisClasses.tickLabel}`]: {
-                      fill: darkMode ? '#ffffff' : '#000000',
-                    },
-                    [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
-                      stroke: darkMode ? '#bbbbbbff' : '#000000', 
-                    }
-                  }}
+
+                  // Change color of the x-axis line
+                  '.MuiChartsAxis-line': {
+                    stroke: darkMode ? '#bbbbbbff' : '#000000',
+                  },
+                  // Change color of x-axis ticks
+                  '.MuiChartsAxis-tick': {
+                    stroke: darkMode ? '#bbbbbbff' : '#000000',
+                  },
+                  // Change color of x-axis tick labels
+                  '.MuiChartsAxis-tickLabel': {
+                    fill: darkMode ? '#e3e3e3ff' : '#000000',
+                  },
+                  
+                }}
 
                   slotProps={{
                     legend: {

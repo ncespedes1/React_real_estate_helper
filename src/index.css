@@ -18,7 +18,7 @@
 
   --primary-bg: #1a226d;
   --secondary-bg: #08073f;
-  --navbar-bg: rgb(5, 26, 66);
+  --navbar-bg: rgb(9, 40, 97);
   --navbar-text: #dcdcf7;
 
   --title-color: #61e4fc;
@@ -26,12 +26,13 @@
   --neutral-glow: #67bcedaa;
 
   --graph-bg: rgba(29, 82, 179, 0.4);
+  --input-bg: rgba(29, 82, 179, 0.5);
 
   --default-button-color: rgb(255, 166, 0);
 }
 
 .mainLight{
-  --primary-color: #d8e8f1;
+  --primary-color: #f1f5f7;
   --secondary-color: #a5d1ee;
 
   --object-primary-bg-color: rgb(12, 180, 209);
@@ -40,16 +41,17 @@
   --highlight-color: #ced5db;
   --accent-color: #c3288d;
 
-  --primary-bg: #f0f4f7;
-  --secondary-bg: #92caf1;
-  --navbar-bg: rgb(5, 26, 66);
-  --navbar-text: #dcdcf7;
+  --primary-bg: #90c8ec;
+  --secondary-bg: #d2e2f0;
+  --navbar-bg: rgb(250, 252, 255);
+  --navbar-text: #4343a5;
 
-  --title-color: #0dcef0;
+  --title-color: #06bbd3;
   --text-color: #333333;
   --neutral-glow: #a5d4fbaa;
 
   --graph-bg: rgba(255, 255, 255, 0.4);
+  --input-bg: rgba(255, 255, 255, 0.5);
 
   --default-button-color: rgb(255, 166, 0);
 }

@@ -72,7 +72,28 @@ const SearchBar = () => {
                 // freeSolo
                 id="search-auto-complete"
                 disableClearable
-                sx={{ width: 300}}
+                sx={{ 
+                    width: 300,
+                    // color: 'var(--text-color)',
+                    //backgroundColor: 'var(--graph-bg)', // Changes the background of the input field
+                    '& .MuiOutlinedInput-notchedOutline': { // Targets the border of the outlined variant
+                    borderColor: 'var(--text-color)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': { // Targets the border on hover
+                    borderColor: 'var(--text-color)',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': { // Targets the border when focused
+                    borderColor: 'var(--text-color)',
+                    },
+                    '& .MuiInputBase-input': { // Targets the actual input text
+                    color: 'var(--text-color)',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '&:hover fieldset': {
+                            borderColor: 'var(--text-color)', // Hover border color
+                        },
+                    }
+                }}
                 options={allCountyNames}
                 getOptionLabel={(option) => option.county_name}
                 getOptionKey={(option) => option.fips_id}
@@ -92,7 +113,6 @@ const SearchBar = () => {
        
         {loading && 
         <div>
-
             <p className='loading-txt'>Loading... One moment please!</p>
         </div>
         }

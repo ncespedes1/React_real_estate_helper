@@ -74,11 +74,11 @@ const CompareListView = () => {
       dataKey: fips_id,
       label: compareCountyList.find(c => c.fips_id === fips_id)?.county_name || fips_id,
       showMark: false,
+      // area: true,
     }))
   ), [favoritesData, compareCountyList]);
 
 
-  // {darkMode ? 'blue' : 'red'},
   // ==========================================
   
 
@@ -88,7 +88,15 @@ const CompareListView = () => {
       <div className='countyDataContainer'>
         <div className='countyDataSettings'>
         <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">County Metric:</FormLabel>
+          <FormLabel 
+          id="demo-radio-buttons-group-label"
+          sx={{ 
+                color: darkMode ? '#ffffff' : '#000000', 
+                "&.Mui-focused": {
+                  color: darkMode ? '#ffffff' : '#000000', 
+                },
+                }}>
+                County Metric:</FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="radio-buttons-group"
@@ -96,7 +104,16 @@ const CompareListView = () => {
             onChange={handleChange}
           >
             {availableMetrics.map((metric) => (
-              <FormControlLabel key={metric.value} value={metric.value} control={<Radio />} label={metric.label} />
+              <FormControlLabel 
+              key={metric.value} 
+              value={metric.value} 
+              label={metric.label} 
+              control={<Radio sx={{
+                        color: 'var(--text-color)', // Unchecked color
+                        '&.Mui-checked': {
+                          color: 'orange', // Checked color
+                        },
+                      }}/>} />
             ))}
           </RadioGroup>
         </FormControl>
@@ -114,16 +131,34 @@ const CompareListView = () => {
                 valueFormatter: (date) => date.toLocaleDateString(),
               }]}
               series={series}
-              sx={() => ({
+              colors={darkMode ? [ '#00e1ff', '#ff7300', '#ff00f6'] : ['blue', '#ff7300', '#ff00f6']}
 
-                [`& .${axisClasses.tickLabel}`]: {
-                  fill: darkMode ? '#ffffff' : '#000000',
-                },
-                [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
-                  stroke: darkMode ? '#bbbbbbff' : '#000000', 
-                }
+              // sx={() => ({
+
+              //   [`& .${axisClasses.tickLabel}`]: {
+              //     fill: darkMode ? '#ffffff' : '#000000',
+              //   },
+              //   [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
+              //     stroke: darkMode ? '#bbbbbbff' : '#000000', 
+              //   }
                 
-              })}
+              // })}
+              sx={{
+
+                // Change color of the x-axis line
+                '.MuiChartsAxis-line': {
+                  stroke: darkMode ? '#bbbbbbff' : '#000000',
+                },
+                // Change color of x-axis ticks
+                '.MuiChartsAxis-tick': {
+                  stroke: darkMode ? '#bbbbbbff' : '#000000',
+                },
+                // Change color of x-axis tick labels
+                '.MuiChartsAxis-tickLabel': {
+                  fill: darkMode ? '#e3e3e3ff' : '#000000',
+                },
+                
+              }}
 
               
               slotProps={{
@@ -160,14 +195,20 @@ const CompareListView = () => {
                     showMark: false,
                   },
                 ]}
-                sx={() => ({
-                  [`& .${axisClasses.tickLabel}`]: {
-                    fill: darkMode ? '#ffffff' : '#000000',
+                sx={{
+                  // Change color of the x-axis line
+                  '.MuiChartsAxis-line': {
+                    stroke: darkMode ? '#bbbbbbff' : '#000000',
                   },
-                  [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
-                    stroke: darkMode ? '#bbbbbbff' : '#000000', 
-                  }
-                })}
+                  // Change color of x-axis ticks
+                  '.MuiChartsAxis-tick': {
+                    stroke: darkMode ? '#bbbbbbff' : '#000000',
+                  },
+                  // Change color of x-axis tick labels
+                  '.MuiChartsAxis-tickLabel': {
+                    fill: darkMode ? '#e3e3e3ff' : '#000000',
+                  },
+                }}
 
                 slotProps={{
                   legend: {
@@ -176,13 +217,13 @@ const CompareListView = () => {
                     },
                   },
                 }}
-                
+
                 height={300}
                 width={800}
               />
               
-              <IconButton onClick={() => removeFavorite(fips_id)} color='red' >
-                <FavoriteIcon />
+              <IconButton onClick={() => removeFavorite(fips_id)} className='favoriteBtn' >
+                <FavoriteIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/>
               </IconButton>
               
             </div>
