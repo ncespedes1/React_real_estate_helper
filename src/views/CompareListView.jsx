@@ -147,6 +147,7 @@ const CompareListView = () => {
           </div>
         </Drawer>
         <div className='countyDataGraphs'>
+          <h2 className='mergedCountyHeader'>Compare your Favorites</h2>
           <div className='mergedChart'>
             <LineChart 
               dataset={mergedDataset}
@@ -161,6 +162,8 @@ const CompareListView = () => {
               series={series}
               // colors={darkMode ? [ '#00e1ff', '#ff7300', '#ff00f6'] : ['blue', '#ff7300', '#ff00f6']}
               colors={darkMode ? [ '#00e1ff', '#ff7300', '#ffae00ff'] : ['blue', '#ff7300ff', '#ffae00ff']}
+              // colors={darkMode ? [ '#00e1ff', '#ffbb00ff', '#5d68fdff'] : ['blue', '#ffae00ff', '#8c00ffff']}
+
 
               // sx={() => ({
 

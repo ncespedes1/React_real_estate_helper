@@ -29,6 +29,19 @@
     /* background-color: var(--primary-bg); */
 }
 
+.profile-info{
+    display: flex;
+    padding-left: 10px;
+}
+
+.profile-info-title{
+    font-weight: 400;
+}
+
+.profile-info-data{
+    padding-left: 30px;
+}
+
 /* .profile-card p{
     margin: 5px;
     width: 28vw;
@@ -56,15 +69,16 @@
 }
 
 .update-button{
-    border: 1px solid var(--title-color);
-    color: var(--title-color);
-    background: var(--input-bg);
+    border: transparent;
+    color: black;
+    background-image: linear-gradient(rgb(255, 208, 0), var(--default-button-color)) ;
+
 }
 
 .delete-button{
-    border: 1px solid rgb(230, 97, 97);
-    color: rgb(200, 80, 80);
-    background: var(--input-bg);
+    border: transparent;
+    color: black;
+    background-image: linear-gradient(rgb(248, 41, 127), rgb(189, 24, 60) );
 }
 
 .update-button:hover {

@@ -22,8 +22,13 @@ const ProfileCard = () => {
         <div />
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <div className='profile-list'>
-            <p>EMAIL: {user?.email}</p>
-            <p>STATUS: {user?.role}</p>
+            <div className='profile-info'>
+              <h4 className='profile-info-title'>EMAIL: </h4><p className='profile-info-data'>{user?.email}</p>
+            </div>
+            <div className='profile-info'>
+              <h4 className='profile-info-title'>STATUS: </h4><p className='profile-info-data'>{user?.role}</p>
+            </div>
+            
           </div>
           <div className='profile-buttons'>
             <button className='update-button' onClick={()=>navigate('/profile/update')}>Update</button>

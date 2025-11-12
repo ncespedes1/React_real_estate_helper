@@ -67,6 +67,15 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.mergedCountyHeader {
+  
+  padding-top: 20px;
+  text-align: center;
+
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .countyDataGraphs {
   /* border: 2px solid white; */
   padding: 6px;
