@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import ThemeSwitch from '../ThemeSwitch';
+import CottageIcon from '@mui/icons-material/Cottage';
 import './NavBar.css'
 
 const NavBar = () => {
@@ -22,7 +23,7 @@ const NavBar = () => {
     <header className={darkMode ? 'mainDark' : 'mainLight'}>
         <nav>
           <div className='nav-leftside'>
-            <h1 id='title'>Curb Appeal</h1>  
+            <h1 id='title'><CottageIcon></CottageIcon> Curb Appeal</h1>  
             <div className='welcome'>
                 {isAuthenticated &&
                 <h2 className='welcomeName'>Welcome {user.first_name} {user.last_name}!</h2>

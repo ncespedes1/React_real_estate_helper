@@ -243,7 +243,8 @@ const HomeView = () => {
 
                   {/* Add slider for date range */}
               </div>
-              
+              <p className='dataSource'> Data sourced from <a href="https://www.realtor.com/research/data/">Realtor.com</a>® Economic Research</p>
+
             </div>
 
           </div>

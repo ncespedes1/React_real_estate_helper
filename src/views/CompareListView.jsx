@@ -241,10 +241,26 @@ const CompareListView = () => {
               
             </div>
             ))}
+          <p className='dataSource'> Data sourced from <a href="https://www.realtor.com/research/data/">Realtor.com</a>® Economic Research</p>
           
         </div>
-        <div>
-          <p>Up to 3 counties can be Favorited at a time</p>
+
+        <div className='compareListNames'>
+          <h3>Favorited Counties:</h3>
+          <br />
+          {compareCountyList.length === 0 && <p>No counties have been added to Favorites.</p>}
+          <ul>
+            {compareCountyList.map((county) => (
+              <li key={county.fips_id}>
+                <IconButton onClick={() => removeFavorite(county.fips_id)} className='favoriteBtn' >
+                  <FavoriteIcon style={{color: darkMode ? '#ff3779ff' : '#ff004cff'}}/>
+                </IconButton>
+                {county.county_name} 
+              </li>
+            ))}
+          </ul>
+          <br />
+          <p>*Up to 3 counties can be Favorited at a time</p>
         </div>
       </div>
     </div>

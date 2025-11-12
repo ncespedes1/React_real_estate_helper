@@ -64,6 +64,7 @@
   text-transform: uppercase;
 
   color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .countyDataGraphs {
@@ -93,3 +94,39 @@
   /* background-image: linear-gradient(to bottom, var(--object-primary-bg-color), var(--object-secondary-bg-color)); */
 }
 
+.dataSource{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+  text-align: center;
+  margin-top: 10px;
+  color: var(--text-color);
+}
+.dataSource a{
+  color: var(--text-color);
+}
+
+.dataSource a:hover{
+  color: var(--accent-color);
+}
+
+.compareListNames{
+  padding: 20px;
+  margin-top: 20px;
+  margin-right: auto;
+  
+  align-self: start;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-color);
+
+  background-color: var(--graph-bg);
+  border-radius: 8px;
+}
+
+.compareListNames ul{
+  list-style-type: none;
+  padding-left: 6px;
+}
+
+.compareListNames li{
+  margin: 6px 0;
+}

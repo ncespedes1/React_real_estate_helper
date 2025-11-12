@@ -83,14 +83,17 @@ const SearchBar = () => {
                 disableClearable
                 sx={{ 
                     width: 300,
-                    '& .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--text-color)' },
+                    backgroundColor: 'var(--graph-bg)',
+                    '& .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--graph-bg)' },
                     '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--text-color)' },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--text-color)' },
                     '& .MuiInputBase-input': { color: 'var(--text-color)' },
+                    // '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {backgroundColor: 'green'},
                     '& .MuiOutlinedInput-root': {
                         '&:hover fieldset': { borderColor: 'var(--text-color)' },
                     }
                 }}
+
                 options={allCountyNames}
                 getOptionLabel={(option) => formatCountyName(option.county_name)}
                 getOptionKey={(option) => option.fips_id}
