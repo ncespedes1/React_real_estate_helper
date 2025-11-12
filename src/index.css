@@ -5,8 +5,10 @@
 }
 
 .mainDark{
-  --primary-color: #1f4daf;
-  --secondary-color: #0cb4d1;
+  --primary-color: #14306d;
+  --secondary-color: #0e6ab6;
+  /* --primary-color: #1f4daf;
+  --secondary-color: #0cb4d1; */
   /* --primary-color: #af1fa3;
   --secondary-color: #d10c68; */
 
@@ -32,21 +34,21 @@
 }
 
 .mainLight{
-  --primary-color: #f1f5f7;
-  --secondary-color: #a5d1ee;
+  --primary-color: #e6f1fa;
+  --secondary-color: #ccddf0;
 
   --object-primary-bg-color: rgb(12, 180, 209);
   --object-secondary-bg-color: #0cb4d1;
 
   --highlight-color: #ced5db;
-  --accent-color: #c3288d;
+  --accent-color: #f3ebf0;
 
-  --primary-bg: #90c8ec;
-  --secondary-bg: #d2e2f0;
-  --navbar-bg: rgb(228, 244, 253);
-  --navbar-text: #4343a5;
+  --primary-bg: #bfd8f5;
+  --secondary-bg: #add1f0;
+  --navbar-bg: rgb(134, 182, 245);
+  --navbar-text: #16239e;
 
-  --title-color: #4d4fdf;
+  --title-color: #1f37be;
   --text-color: #333333;
   --neutral-glow: #a5d4fbaa;
 

@@ -157,7 +157,8 @@ const CompareListView = () => {
                 { valueFormatter: getValueFormatter() }
               ]}
               series={series}
-              colors={darkMode ? [ '#00e1ff', '#ff7300', '#ff00f6'] : ['blue', '#ff7300', '#ff00f6']}
+              // colors={darkMode ? [ '#00e1ff', '#ff7300', '#ff00f6'] : ['blue', '#ff7300', '#ff00f6']}
+              colors={darkMode ? [ '#00e1ff', '#ff7300', '#ffae00ff'] : ['blue', '#ff7300ff', '#ffae00ff']}
 
               // sx={() => ({
 

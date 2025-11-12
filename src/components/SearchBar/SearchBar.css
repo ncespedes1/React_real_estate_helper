@@ -42,7 +42,9 @@
   cursor: pointer;
   transition: border-color 0.25s;
 
-  background-color: var(--default-button-color);
+  /* background-color: var(--default-button-color); */
+  background-image: linear-gradient(rgb(255, 208, 0), var(--default-button-color)) ;
+
   border: none;
 }
 

@@ -60,11 +60,10 @@
 }
 
 .userForm button:hover {
-  
-
   color: white;
-  background: var(--primary-bg);
-  border: 2px solid white;
+  background: var(--default-button-color);
+  /* border: 2px solid white; */
+  cursor: pointer;
   
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  /* filter: drop-shadow(0 0 2em #61dafbaa); */
 }
