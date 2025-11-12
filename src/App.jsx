@@ -17,14 +17,17 @@ function App() {
     <div id='appDiv'className={darkMode ? 'mainDark' : 'mainLight'}>
       <BrowserRouter>
         <NavBar/>
-        <Routes>
-          <Route path='/' element={<HomeView/>}/>
-          <Route path='/login' element={<LoginView/>}/>
-          <Route path='/profile' element={<ProfileView/>}/>
-          <Route path='/favorites' element={<CompareListView/>}/>
-          <Route path='/profile/update' element={<UpdateProfileView/>}/>
-          <Route path='/register' element={<RegisterUserView/>}/>
-        </Routes>
+        <div className="mainScreen">
+          <Routes>
+            <Route path='/' element={<HomeView/>}/>
+            <Route path='/login' element={<LoginView/>}/>
+            <Route path='/profile' element={<ProfileView/>}/>
+            <Route path='/favorites' element={<CompareListView/>}/>
+            <Route path='/profile/update' element={<UpdateProfileView/>}/>
+            <Route path='/register' element={<RegisterUserView/>}/>
+          </Routes>
+        </div>
+
       </BrowserRouter>
     </div>
   )
