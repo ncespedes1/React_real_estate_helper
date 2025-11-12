@@ -16,6 +16,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon  from '@mui/icons-material/FavoriteBorder'
 import { axisClasses } from '@mui/x-charts'
 import { Drawer } from '@mui/material'
+import { percentFormatter, priceFormatter, formatCountyName } from '../utils/formatters'
 
 const CompareListView = () => {
 
@@ -43,6 +44,14 @@ const CompareListView = () => {
   const [selectedValue, setSelectedValue] = useState(availableMetrics[0].value);
 
   // ==============MULTILINE GRAPH AREA=================
+
+  function getValueFormatter() {
+    if (selectedValue === 'active_listing_count_yy')
+      return percentFormatter
+    else if (selectedValue === 'median_listing_price')
+      return priceFormatter
+    return undefined
+  }
 
   const mergedDataset = useMemo(() => {
     const result = [];
@@ -73,11 +82,12 @@ const CompareListView = () => {
   const series = useMemo(() => (
     Array.from(favoritesData.keys()).map(fips_id => ({
       dataKey: fips_id,
-      label: compareCountyList.find(c => c.fips_id === fips_id)?.county_name || fips_id,
+      label: formatCountyName(compareCountyList.find(c => c.fips_id === fips_id)?.county_name || fips_id),
       showMark: false,
+      valueFormatter: getValueFormatter()
       // area: true,
     }))
-  ), [favoritesData, compareCountyList]);
+  ), [favoritesData, compareCountyList, getValueFormatter]);
 
 
   // ==========================================
@@ -143,6 +153,9 @@ const CompareListView = () => {
                 scaleType: 'time',
                 valueFormatter: (date) => date.toLocaleDateString(),
               }]}
+              yAxis={[
+                { valueFormatter: getValueFormatter() }
+              ]}
               series={series}
               colors={darkMode ? [ '#00e1ff', '#ff7300', '#ff00f6'] : ['blue', '#ff7300', '#ff00f6']}
 
@@ -200,12 +213,16 @@ const CompareListView = () => {
                   valueFormatter: (date) => date.toLocaleDateString(),
 
                     }]}
+                yAxis={[
+                      { valueFormatter: getValueFormatter() }
+                    ]}
                 series={[
                   {
                     dataKey: selectedValue,
-                    label: compareCountyList.find(county => county.fips_id === fips_id).county_name,
+                    label: formatCountyName(compareCountyList.find(county => county.fips_id === fips_id).county_name),
                     color: darkMode ? '#00e1ff' : 'blue',
                     showMark: false,
+                    valueFormatter: getValueFormatter()
                   },
                 ]}
                 sx={{
@@ -255,7 +272,7 @@ const CompareListView = () => {
                 <IconButton onClick={() => removeFavorite(county.fips_id)} className='favoriteBtn' >
                   <FavoriteIcon style={{color: darkMode ? '#ff3779ff' : '#ff004cff'}}/>
                 </IconButton>
-                {county.county_name} 
+                {formatCountyName(county.county_name)} 
               </li>
             ))}
           </ul>
