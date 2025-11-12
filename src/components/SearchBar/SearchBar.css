@@ -23,16 +23,16 @@
     border: none;
 } */
 
-.input-autocomplete{
-    /* border-radius: 8px 0 0 8px; */
-    /* height: 2.2em; */
+/* .input-autocomplete{
+    border-radius: 8px 0 0 8px;
+    height: 2.2em;
 
-    /* padding: 0 1.2em; */
+    padding: 0 1.2em;
 
-    /* border: none; */
-    /* color: var(--text-color); */
+    border: none;
+    color: var(--text-color);
 
-}
+} */
 
 .search-button {
   border-radius: 0 8px 8px 0;

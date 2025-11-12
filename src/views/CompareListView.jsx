@@ -101,9 +101,9 @@ const CompareListView = () => {
         <Drawer
           variant="permanent"
           sx={{
-            width: 240,
+            width: 290,
             flexShrink: 0,
-            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box', top: '10vh' },
+            [`& .MuiDrawer-paper`]: { border: 'none', width: 290, boxSizing: 'border-box', top: '80px' },
           }}
           >
           <div className='countyDataSettings'>

@@ -4,7 +4,7 @@
 }
 
 .mainScreen {
-  padding-top: 10vh;
+  padding-top: 80px;
 }
 
 .favoriteBtn {
@@ -42,7 +42,7 @@
   position: sticky;
   top: 0;
 
-  padding: 20px 10px;
+  padding: 20px 0 20px 40px;
 
   color: var(--text-color);
 
