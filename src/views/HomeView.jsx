@@ -112,6 +112,8 @@ const HomeView = () => {
               id="demo-radio-buttons-group-label"
               sx={{ 
                 color: darkMode ? '#ffffff' : '#000000', 
+                fontSize: 20,
+                padding: '10px 0', 
                 "&.Mui-focused": {
                   color: darkMode ? '#ffffff' : '#000000', 
                 },
