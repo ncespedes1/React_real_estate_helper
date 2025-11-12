@@ -9,6 +9,16 @@ const SearchBar = () => {
     const [county, setCounty] = useState(null)
     const [inputValue, setInputValue] = useState('')
 
+    // Capitalize each word before comma, uppercase after comma
+    function formatCountyName(name) {
+        const [beforeComma, afterComma] = name.split(',');
+        const titleCase = beforeComma
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+        return `${titleCase},${afterComma.toUpperCase()}`;
+    }
+
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
     const { allCountyNames, getCountyData } = useLocationData()
@@ -67,48 +77,41 @@ const SearchBar = () => {
     <div>
         <form className="searchForm" onSubmit={(e) => handleSubmit(e)}>
 
-            <Autocomplete className="input-autocomplete"
-                
-                // freeSolo
+            <Autocomplete
+                className="input-autocomplete"
                 id="search-auto-complete"
                 disableClearable
                 sx={{ 
                     width: 300,
-                    // color: 'var(--text-color)',
-                    //backgroundColor: 'var(--graph-bg)', // Changes the background of the input field
-                    '& .MuiOutlinedInput-notchedOutline': { // Targets the border of the outlined variant
-                    borderColor: 'var(--text-color)',
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': { // Targets the border on hover
-                    borderColor: 'var(--text-color)',
-                    },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': { // Targets the border when focused
-                    borderColor: 'var(--text-color)',
-                    },
-                    '& .MuiInputBase-input': { // Targets the actual input text
-                    color: 'var(--text-color)',
-                    },
+                    '& .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--text-color)' },
+                    '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--text-color)' },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--text-color)' },
+                    '& .MuiInputBase-input': { color: 'var(--text-color)' },
                     '& .MuiOutlinedInput-root': {
-                        '&:hover fieldset': {
-                            borderColor: 'var(--text-color)', // Hover border color
-                        },
+                        '&:hover fieldset': { borderColor: 'var(--text-color)' },
                     }
                 }}
                 options={allCountyNames}
-                getOptionLabel={(option) => option.county_name}
+                getOptionLabel={(option) => formatCountyName(option.county_name)}
                 getOptionKey={(option) => option.fips_id}
                 filterOptions={filterOptions}
                 renderInput={(params) => 
-                    <TextField {...params} 
-                        label="County Name" 
-                    />}
-
+                    <TextField {...params} label="County Name" />
+                }
                 value={county}
-                onChange={(e, newCounty) => setCounty(newCounty)}
-
+                onChange={(e, newCounty) => {
+                    setCounty(newCounty);
+                    if (newCounty && newCounty.county_name) {
+                        setInputValue(formatCountyName(newCounty.county_name));
+                    }
+                }}
                 inputValue={inputValue}
-                onInputChange={(e, newInputValue) => setInputValue(newInputValue)}
-
+                onInputChange={(e, newInputValue, reason) => {
+                    // Only update inputValue directly if user is typing
+                    if (reason === 'input') {
+                        setInputValue(newInputValue);
+                    }
+                }}
             />
             <button type="submit" className="search-button"><SearchIcon/></button>
             
