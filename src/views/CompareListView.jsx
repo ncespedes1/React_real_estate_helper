@@ -15,6 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon  from '@mui/icons-material/FavoriteBorder'
 import { axisClasses } from '@mui/x-charts'
+import { Drawer } from '@mui/material'
 
 const CompareListView = () => {
 
@@ -86,41 +87,53 @@ const CompareListView = () => {
   return (
     <div>
       <div className='countyDataContainer'>
-        <div className='countyDataSettings'>
-        <FormControl>
-          <FormLabel 
-          id="demo-radio-buttons-group-label"
-          sx={{ 
+
+        <Drawer
+          variant="permanent"
+          sx={{
+            width: 240,
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box', top: '10vh' },
+          }}
+          >
+          <div className='countyDataSettings'>
+            <FormControl>
+              <FormLabel 
+              id="demo-radio-buttons-group-label"
+              sx={{ 
                 color: darkMode ? '#ffffff' : '#000000', 
                 "&.Mui-focused": {
                   color: darkMode ? '#ffffff' : '#000000', 
                 },
                 }}>
                 County Metric:</FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="radio-buttons-group"
-            value={selectedValue}
-            onChange={handleChange}
-          >
-            {availableMetrics.map((metric) => (
-              <FormControlLabel 
-              key={metric.value} 
-              value={metric.value} 
-              label={metric.label} 
-              control={<Radio sx={{
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                name="radio-buttons-group"
+                value={selectedValue}
+                onChange={handleChange}
+              >
+                {availableMetrics.map((metric) => (
+                  <FormControlLabel 
+                  key={metric.value} 
+                  value={metric.value} 
+                  // control={<Radio />} 
+                  label={metric.label}
+                  control={
+                    <Radio
+                      sx={{
                         color: 'var(--text-color)', // Unchecked color
                         '&.Mui-checked': {
                           color: 'orange', // Checked color
                         },
-                      }}/>} />
-            ))}
-          </RadioGroup>
-        </FormControl>
-        
-        </div>
-        
-
+                      }}
+                    />
+                  } />
+                ))}
+              </RadioGroup>
+            </FormControl>
+          </div>
+        </Drawer>
         <div className='countyDataGraphs'>
           <div className='mergedChart'>
             <LineChart 

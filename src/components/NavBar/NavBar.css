@@ -5,6 +5,10 @@ header{
     background: var(--navbar-bg);
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    position: fixed;
+    z-index: 1301;
+    width: 100%;
+    height: 10vh;
 }
 
 

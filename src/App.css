@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+.mainScreen {
+  padding-top: 10vh;
+}
+
 .favoriteBtn {
   align-self: start;
   height: fit-content;
