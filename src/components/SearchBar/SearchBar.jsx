@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLocationData } from '../../contexts/LocationDataContext'
 import './SearchBar.css'
-import { Autocomplete, createFilterOptions, Stack, TextField } from '@mui/material'
+import { Autocomplete, CircularProgress, createFilterOptions, Stack, TextField } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import { formatCountyName } from '../../utils/formatters';
 
@@ -107,15 +107,13 @@ const SearchBar = () => {
                     }
                 }}
             />
-            <button type="submit" className="search-button"><SearchIcon/></button>
+            <button type="submit" className="search-button">
+                {loading ? <CircularProgress size={20}/> : <SearchIcon/>}
+                
+            </button>
             
         </form>
        
-        {loading && 
-        <div>
-            <p className='loading-txt'>Loading... One moment please!</p>
-        </div>
-        }
         {errorMessage()}
         
     </div>
