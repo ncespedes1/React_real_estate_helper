@@ -3,21 +3,12 @@ import { useLocationData } from '../../contexts/LocationDataContext'
 import './SearchBar.css'
 import { Autocomplete, createFilterOptions, Stack, TextField } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
+import { formatCountyName } from '../../utils/formatters';
 
 const SearchBar = () => {
 
     const [county, setCounty] = useState(null)
     const [inputValue, setInputValue] = useState('')
-
-    // Capitalize each word before comma, uppercase after comma
-    function formatCountyName(name) {
-        const [beforeComma, afterComma] = name.split(',');
-        const titleCase = beforeComma
-            .split(' ')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-        return `${titleCase},${afterComma.toUpperCase()}`;
-    }
 
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)

@@ -16,6 +16,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon  from '@mui/icons-material/FavoriteBorder'
 import { Drawer } from '@mui/material'
 import { axisClasses } from '@mui/x-charts'
+import { percentFormatter, priceFormatter } from '../utils/formatters'
 
 import './HomeView.css'
 
@@ -57,6 +58,13 @@ const HomeView = () => {
 
   const [selectedValue, setSelectedValue] = useState(availableMetrics[0].value);
 
+  function getValueFormatter() {
+    if (selectedValue === 'active_listing_count_yy')
+      return percentFormatter
+    else if (selectedValue === 'median_listing_price')
+      return priceFormatter
+    return undefined
+  }
   // const GradientComponent = () => {
   //   const {
   //     top,
@@ -143,43 +151,6 @@ const HomeView = () => {
         <div>
 
           <div className='countyDataContainer'>
-            {/* <div className='countyDataSettings'>
-            <FormControl>
-              <FormLabel 
-              id="demo-radio-buttons-group-label"
-              sx={{ 
-                color: darkMode ? '#ffffff' : '#000000', 
-                "&.Mui-focused": {
-                  color: darkMode ? '#ffffff' : '#000000', 
-                },
-                }}>
-                County Metric:</FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                name="radio-buttons-group"
-                value={selectedValue}
-                onChange={handleChange}
-              >
-                {availableMetrics.map((metric) => (
-                  <FormControlLabel 
-                  key={metric.value} 
-                  value={metric.value} 
-                  // control={<Radio />} 
-                  label={metric.label}
-                  control={
-                    <Radio
-                      sx={{
-                        color: 'var(--text-color)', // Unchecked color
-                        '&.Mui-checked': {
-                          color: 'orange', // Checked color
-                        },
-                      }}
-                    />
-                  } />
-                ))}
-              </RadioGroup>
-            </FormControl>
-            </div> */}
 
             <div className='homeCountyDataGraph'>
 
@@ -200,12 +171,16 @@ const HomeView = () => {
                       valueFormatter: (date) => date.toLocaleDateString(),
 
                       }]}
+                    yAxis={[
+                      { valueFormatter: getValueFormatter() }
+                    ]}
                     series={[
                       {
                         dataKey: selectedValue,
                         label: availableMetrics.find(option => option.value === selectedValue)?.label,
                         color: darkMode ? '#00e1ff' : 'blue',
                         showMark: false,
+                        valueFormatter: getValueFormatter()
                       },
                     ]}
                     
