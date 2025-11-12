@@ -68,6 +68,10 @@ export const AuthProvider = ({ children }) =>{
             localStorage.setItem('user', JSON.stringify(updatedUserData))
 
             return true
+        } else if (response.status == 401){
+            //Login expired
+            logout();
+            return false
         } else {
             return false
         }
@@ -110,10 +114,21 @@ export const AuthProvider = ({ children }) =>{
             }
         })
 
-        const responseData = await response.json();
-        console.log(responseData);
-        logout();
+        if (response.status == 200){
+            const responseData = await response.json();
+            console.log(responseData);
+            logout();
+            return true;
+        } else if (response.status == 401){
+            //Login expired
+            console.log('User login expired. Logging out.');
+            logout();
+            return false;
+        } else {
+            return false;
+        }
     }
+        
     
 
 

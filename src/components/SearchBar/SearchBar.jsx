@@ -98,7 +98,10 @@ const SearchBar = () => {
                 getOptionLabel={(option) => option.county_name}
                 getOptionKey={(option) => option.fips_id}
                 filterOptions={filterOptions}
-                renderInput={(params) => <TextField {...params} label="County Name" />}
+                renderInput={(params) => 
+                    <TextField {...params} 
+                        label="County Name" 
+                    />}
 
                 value={county}
                 onChange={(e, newCounty) => setCounty(newCounty)}

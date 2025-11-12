@@ -13,7 +13,7 @@ const NavBar = () => {
 
     const handleLogout = () => {
       logout();
-      navigate('/')
+      navigate('/login')
     }
 
     // const getLocationNames = 
@@ -21,12 +21,15 @@ const NavBar = () => {
   return (
     <header className={darkMode ? 'mainDark' : 'mainLight'}>
         <nav>
-            <h1 id='title'>Real Estate Helper</h1>  
+          <div className='nav-leftside'>
+            <h1 id='title'>Curb Appeal</h1>  
             <div className='welcome'>
                 {isAuthenticated &&
                 <h2 className='welcomeName'>Welcome {user.first_name} {user.last_name}!</h2>
                 }
             </div>
+          </div>
+          <div className='nav-rightside'>
             <ul className='navLinks'>
                 <NavLink to='/'>HOME</NavLink>
                 {isAuthenticated ? 
@@ -42,8 +45,10 @@ const NavBar = () => {
                 
                 </>
                 }
-                <ThemeSwitch onClick={toggleTheme}/>
+                
             </ul>
+            <ThemeSwitch onClick={toggleTheme}/>
+            </div>
         </nav>
     </header>
   )

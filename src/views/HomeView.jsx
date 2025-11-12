@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar/SearchBar'
 import { useLocationData } from '../contexts/LocationDataContext'
 import { useTheme } from '../contexts/ThemeContext'
 
-import { LineChart } from '@mui/x-charts/LineChart'
+import { LineChart} from '@mui/x-charts/LineChart'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -47,7 +47,7 @@ const HomeView = () => {
 
   const availableMetrics = [
     { value: 'active_listing_count', label: 'Active Listing Count' },
-    { value: 'active_listing_count_yy', label: 'Active Listing Count Annual' },
+    { value: 'active_listing_count_yy', label: 'Active Listing Count - Y/Y % Change' },
     { value: 'median_days_on_market', label: 'Median Days on Market' }, 
     { value: 'median_listing_price', label: 'Median Listing Price' },
     { value: 'price_reduced_count', label: 'Price Reduced Count' },
@@ -55,6 +55,36 @@ const HomeView = () => {
   ]
 
   const [selectedValue, setSelectedValue] = useState(availableMetrics[0].value);
+
+  // const GradientComponent = () => {
+  //   const {
+  //     top,
+  //     bottom,
+  //     height
+  //   } = useDrawingArea();
+  //   const svgHeight = top + bottom + height;
+
+  //   return ( 
+  //     <defs>
+  //     <linearGradient 
+  //     id = "myGradient"
+  //     x1 = "0"
+  //     y1 = "0"
+  //     x2 = "0"
+  //     y2 = {`${svgHeight}px`}
+  //     gradientUnits = "userSpaceOnUse" >
+  //     <
+  //     stop offset = "0%"
+  //     stopColor = "#B519EC"
+  //     stopOpacity = "0.4" / >
+  //     <
+  //     stop offset = "100%"
+  //     stopColor = "#B519EC"
+  //     stopOpacity = "0" / >
+  //     </linearGradient> 
+  //     </defs>
+  //   );
+  // };
 
 
   return (
@@ -104,55 +134,52 @@ const HomeView = () => {
             </div>
 
             <div className='homeCountyDataGraph'>
+
               <div className='soloCountyHeader'>
-                  <h2> {tempCountyNameMap.county_name} </h2>
-                  <p> (FIPS: {tempCountyNameMap.fips_id}) </p>
-                  <IconButton onClick={handleToggleFavorite} className='favoriteBtn'>
-                    {checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/> : <FavoriteBorderIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/>}
-                  </IconButton>
-                </div>
+                <h2> {tempCountyNameMap.county_name} </h2>
+                {/* <p> (FIPS: {tempCountyNameMap.fips_id}) </p> */}
+                <IconButton onClick={handleToggleFavorite} className='favoriteBtn'>
+                  {checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon style={{color: darkMode ? '#ff3779ff' : '#ff004cff'}}/> : <FavoriteBorderIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/>}
+                </IconButton>
+              </div>
 
               <div className='individualCountyChart'>
                 <LineChart
-                dataset={getFormattedData(tempCountyData)}
-                  xAxis={[{ 
-                    dataKey: 'info_date',
-                    scaleType: 'time',
-                    valueFormatter: (date) => date.toLocaleDateString(),
+                  dataset={getFormattedData(tempCountyData)}
+                    xAxis={[{ 
+                      dataKey: 'info_date',
+                      scaleType: 'time',
+                      valueFormatter: (date) => date.toLocaleDateString(),
 
-                    }]}
-                  series={[
-                    {
-                      dataKey: selectedValue,
-                      label: availableMetrics.find(option => option.value === selectedValue)?.label,
-                      color: darkMode ? '#00e1ff' : 'blue',
-                      showMark: false,
+                      }]}
+                    series={[
+                      {
+                        dataKey: selectedValue,
+                        label: availableMetrics.find(option => option.value === selectedValue)?.label,
+                        color: darkMode ? '#00e1ff' : 'blue',
+                        showMark: false,
+                      },
+                    ]}
+                    
+                    sx={{
+
+                    // Change color of the x-axis line
+                    '& .MuiChartsAxis-root .MuiChartsAxis-line': {
+                      stroke: darkMode ? '#bbbbbbff' : '#000000',
                     },
-                  ]}
-                  // sx={{
-                  //   [`& .${axisClasses.tickLabel}`]: {
-                  //     fill: darkMode ? '#ffffff' : '#000000',
-                  //   },
-                  //   [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
-                  //     stroke: darkMode ? '#bbbbbbff' : '#000000', 
-                  //   }
-                  // }}
-                  sx={{
-
-                  // Change color of the x-axis line
-                  '.MuiChartsAxis-line': {
-                    stroke: darkMode ? '#bbbbbbff' : '#000000',
-                  },
-                  // Change color of x-axis ticks
-                  '.MuiChartsAxis-tick': {
-                    stroke: darkMode ? '#bbbbbbff' : '#000000',
-                  },
-                  // Change color of x-axis tick labels
-                  '.MuiChartsAxis-tickLabel': {
-                    fill: darkMode ? '#e3e3e3ff' : '#000000',
-                  },
-                  
-                }}
+                    // Change color of x-axis ticks
+                    '& .MuiChartsAxis-root .MuiChartsAxis-tick': {
+                      stroke: darkMode ? '#bbbbbbff' : '#000000',
+                    },
+                    // Change color of x-axis tick labels
+                    '& .MuiChartsAxis-root .MuiChartsAxis-tickLabel': {
+                      fill: darkMode ? '#e3e3e3ff' : '#000000',
+                    },
+                    // "& .MuiChartsArea-root": {
+                    //   fill: "url(#myGradient)",
+                    // },
+                    
+                  }}
 
                   slotProps={{
                     legend: {
@@ -168,6 +195,7 @@ const HomeView = () => {
 
                   {/* Add slider for date range */}
               </div>
+              
             </div>
 
           </div>

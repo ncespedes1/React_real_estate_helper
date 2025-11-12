@@ -1,18 +1,2 @@
-.soloCountyHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
 
-  color: var(--text-color);
-}
 
-.favoriteBtn {
-  align-self: start;
-  height: fit-content;
-}
-
-.favoriteBtn:hover {
-  cursor: pointer;
-  /* filter: drop-shadow(0 0 2em #61dafbaa); */
-}

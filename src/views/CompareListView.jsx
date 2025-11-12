@@ -32,7 +32,7 @@ const CompareListView = () => {
 
   const availableMetrics = [
     { value: 'active_listing_count', label: 'Active Listing Count' },
-    { value: 'active_listing_count_yy', label: 'Active Listing Count Annual' },
+    { value: 'active_listing_count_yy', label: 'Active Listing Count - Y/Y % Change' },
     { value: 'median_days_on_market', label: 'Median Days on Market' }, 
     { value: 'median_listing_price', label: 'Median Listing Price' },
     { value: 'price_reduced_count', label: 'Price Reduced Count' },
@@ -146,15 +146,15 @@ const CompareListView = () => {
               sx={{
 
                 // Change color of the x-axis line
-                '.MuiChartsAxis-line': {
+                '& .MuiChartsAxis-root .MuiChartsAxis-line': {
                   stroke: darkMode ? '#bbbbbbff' : '#000000',
                 },
                 // Change color of x-axis ticks
-                '.MuiChartsAxis-tick': {
+                '& .MuiChartsAxis-root .MuiChartsAxis-tick': {
                   stroke: darkMode ? '#bbbbbbff' : '#000000',
                 },
                 // Change color of x-axis tick labels
-                '.MuiChartsAxis-tickLabel': {
+                '& .MuiChartsAxis-root .MuiChartsAxis-tickLabel': {
                   fill: darkMode ? '#e3e3e3ff' : '#000000',
                 },
                 
@@ -197,15 +197,15 @@ const CompareListView = () => {
                 ]}
                 sx={{
                   // Change color of the x-axis line
-                  '.MuiChartsAxis-line': {
+                  '& .MuiChartsAxis-root .MuiChartsAxis-line': {
                     stroke: darkMode ? '#bbbbbbff' : '#000000',
                   },
                   // Change color of x-axis ticks
-                  '.MuiChartsAxis-tick': {
+                  '& .MuiChartsAxis-root .MuiChartsAxis-tick': {
                     stroke: darkMode ? '#bbbbbbff' : '#000000',
                   },
                   // Change color of x-axis tick labels
-                  '.MuiChartsAxis-tickLabel': {
+                  '& .MuiChartsAxis-root .MuiChartsAxis-tickLabel': {
                     fill: darkMode ? '#e3e3e3ff' : '#000000',
                   },
                 }}
@@ -223,7 +223,7 @@ const CompareListView = () => {
               />
               
               <IconButton onClick={() => removeFavorite(fips_id)} className='favoriteBtn' >
-                <FavoriteIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/>
+                <FavoriteIcon style={{color: darkMode ? '#ff3779ff' : '#ff004cff'}}/>
               </IconButton>
               
             </div>

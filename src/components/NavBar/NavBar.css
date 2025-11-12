@@ -3,38 +3,52 @@ header{
     margin: 0;
     min-width: 1280px;
     background: var(--navbar-bg);
-    
-    margin-bottom: 25px;
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-.welcomeName{
-    font-weight: normal;
-    
-}
 
 nav{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 15px;
     color: var(--navbar-text);
+}
+
+.nav-rightside{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    padding-right: 20px;
+}
+
+.nav-leftside{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 h1 {
   /* font-size: 3.2em;
   line-height: 1.1; */
   color: var(--title-color);
+  padding: 0 20px;
+}
+
+.welcomeName{
+    font-weight: normal;
+    font-size: 1.2em;
 }
 
 .navLinks{
-    /* padding-bottom: 25px; */
 
     display: flex;
     /* justify-content: space-evenly; */
-    align-self: center;
+    /* align-self: center; */
     gap: 40px;
+    padding-right: 40px;
 }
 
 nav a{

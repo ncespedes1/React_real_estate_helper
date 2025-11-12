@@ -3,6 +3,17 @@
   padding: 0;
 }
 
+.favoriteBtn {
+  align-self: start;
+  height: fit-content;
+}
+
+.favoriteBtn:hover {
+  cursor: pointer;
+  /* filter: drop-shadow(0 0 2em #61dafbaa); */
+}
+
+
 
 /* GRAPH TESTING */
 
@@ -10,22 +21,22 @@
 .countyDataContainer {
   display: flex;
   align-items: center;
-  margin-top: 20px;
 
-  /* border: 2px solid white; */
 
+  /* border: 2px solid rgb(255, 0, 0); */
   /* color: var(--text-color); */
 }
 
 .countyDataSettings {
   align-self: start;
+
   background-image: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
   
-  height: 80vh;
+  height: 100vh;
   min-width: fit-content;
 
   position: sticky;
-  top: 18px;
+  top: 0;
 
   padding: 20px 10px;
 
@@ -36,11 +47,27 @@
 .homeCountyDataGraph{
   padding: 6px;
   align-self: start;
+  
+  /* border: 2px solid green; */
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.soloCountyHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+
+  color: var(--text-color);
 }
 
 .countyDataGraphs {
   /* border: 2px solid white; */
   padding: 6px;
+
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .mergedChart{
@@ -54,6 +81,7 @@
 .individualCountyChart {
   border-radius: 8px;
   display: flex; /* due to heart icon */
+
   
   margin: 14px 8px;
   padding: 6px;

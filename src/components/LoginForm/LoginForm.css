@@ -24,7 +24,7 @@
     border-radius: 15px;
     background: rgb(173, 216, 230, 0.3);
     color: var(--text-color);
-    /* border: 1px solid black; */
+    background: var(--graph-bg);
 
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.45) 0px 8px 16px -8px;
 }
