@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar/SearchBar'
 import { useLocationData } from '../contexts/LocationDataContext'
 import { useTheme } from '../contexts/ThemeContext'
 
-import { LineChart} from '@mui/x-charts/LineChart'
+import { LineChart, areaElementClasses} from '@mui/x-charts/LineChart'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -181,7 +181,8 @@ const HomeView = () => {
                         label: availableMetrics.find(option => option.value === selectedValue)?.label,
                         color: darkMode ? '#00e1ff' : 'blue',
                         showMark: false,
-                        valueFormatter: getValueFormatter()
+                        valueFormatter: getValueFormatter(),
+                        area: true,
                       },
                     ]}
                     
@@ -199,9 +200,10 @@ const HomeView = () => {
                     '& .MuiChartsAxis-root .MuiChartsAxis-tickLabel': {
                       fill: darkMode ? '#e3e3e3ff' : '#000000',
                     },
-                    // "& .MuiChartsArea-root": {
-                    //   fill: "url(#myGradient)",
-                    // },
+                    [`& .${areaElementClasses.root}`]: {
+                      fill: selectedValue === "active_listing_count_yy" ? "none" : "url(#areaGradient)",
+                      filter: 'none'
+                    },
                     
                   }}
 
@@ -215,7 +217,14 @@ const HomeView = () => {
 
                   height={300}
                   width={800}
-                />
+                >
+                  <defs>
+                    <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor= {darkMode ? "#00bbffff" : "#4652ffff"} stopOpacity={1}/>
+                      <stop offset="100%" stopColor="var(--primary-bg)" stopOpacity={1}/>
+                    </linearGradient>
+                  </defs>
+                </LineChart>
 
                   {/* Add slider for date range */}
               </div>
