@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import './UserForm.css'
-// import { CircularProgress } from '@mui/material'
+import { CircularProgress } from '@mui/material'
 import { useTheme } from '../../contexts/ThemeContext';
 
 const UserForm = ({ submitFunction, onSuccessRedirect }) => {
@@ -88,14 +88,9 @@ const UserForm = ({ submitFunction, onSuccessRedirect }) => {
             <input type="role" name='role' placeholder='role' onChange={(e)=>handleChange(e)} value={formData.role} required/>
         </div> */}
 
-        <button type='submit' style={{backgroundColor: darkMode ? 'rgb(107, 207, 260, 0.2)': '#336388ff'}}>Submit</button>
-
-        {loading && 
-            <div>
-                
-                <p>Loading. One moment please!</p>
-            </div>
-        }
+        <button type='submit' disabled={loading} style={{backgroundColor: darkMode ? 'rgb(107, 207, 260, 0.2)': '#336388ff'}}>
+            {loading ? <CircularProgress size={20}/> : "Submit"}
+        </button>
         {errorMessage()}
         {successMessage()}
 

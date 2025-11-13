@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate, Link } from 'react-router-dom'
-// import { CircularProgress } from '@mui/material'
+import { CircularProgress } from '@mui/material'
 import './LoginForm.css'
 
 import { useTheme } from '../../contexts/ThemeContext';
@@ -62,13 +62,9 @@ const LoginForm = () => {
             type="password" 
             required/>
 
-            <button type='submit'>Sign In</button>
-            {loading && 
-            <div>
-
-                <p className='loading-txt'>Loading... One moment please!</p>
-            </div>
-            }
+            <button type='submit' disabled={loading}>
+                {loading ? <CircularProgress size={20}/> : "Sign in"}
+            </button>
             {errorMessage()}
             
             <p className='sign-up'>

@@ -15,34 +15,34 @@ const SearchBar = () => {
     const { allCountyNames, getCountyData } = useLocationData()
 
 
-    const handleSubmit = async (event) => {
-        console.log(county)
+    const handleSubmit = async (event, selectedCounty = county) => {
         setError(false)
         setLoading(true)
         event.preventDefault()
 
         //===============
 
-        let selectedCounty = county
+        let countyToUse = selectedCounty
 
         // If no county selected, try to match input to first option
-        if (!selectedCounty && inputValue) {
-            selectedCounty = allCountyNames.find(
+        if (!countyToUse && inputValue) {
+            countyToUse = allCountyNames.find(
                 (c) => c.county_name.toLowerCase().startsWith(inputValue.toLowerCase())
             )
-            setCounty(selectedCounty || null)
+            setCounty(countyToUse || null)
         }
 
-        if (!selectedCounty) {
+        if (!countyToUse) {
             setError(true)
             setLoading(false)
             return
         }
+        console.log(countyToUse)
 
         //===============
 
 
-        const countyDataFound = await getCountyData(selectedCounty.fips_id, selectedCounty.county_name)
+        const countyDataFound = await getCountyData(countyToUse.fips_id, countyToUse.county_name)
     
         setLoading(false)
         if (countyDataFound){
@@ -84,7 +84,8 @@ const SearchBar = () => {
                         '&:hover fieldset': { borderColor: 'var(--text-color)' },
                     }
                 }}
-
+                freeSolo
+                autoHighlight
                 options={allCountyNames}
                 getOptionLabel={(option) => formatCountyName(option.county_name)}
                 getOptionKey={(option) => option.fips_id}
@@ -94,9 +95,10 @@ const SearchBar = () => {
                 }
                 value={county}
                 onChange={(e, newCounty) => {
-                    setCounty(newCounty);
                     if (newCounty && newCounty.county_name) {
+                        setCounty(newCounty);
                         setInputValue(formatCountyName(newCounty.county_name));
+                        handleSubmit(e, newCounty)
                     }
                 }}
                 inputValue={inputValue}
@@ -107,7 +109,7 @@ const SearchBar = () => {
                     }
                 }}
             />
-            <button type="submit" className="search-button">
+            <button type="submit" className="search-button" disabled={loading}>
                 {loading ? <CircularProgress size={20}/> : <SearchIcon/>}
                 
             </button>
