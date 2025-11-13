@@ -6,6 +6,7 @@ export const priceFormatter = (value) => value != null? `$${value.toLocaleString
 
 // Capitalize each word before comma, uppercase after comma
 export function formatCountyName(name) {
+    if (!name) return ''
     const [beforeComma, afterComma] = name.split(',');
     const titleCase = beforeComma
         .split(' ')
