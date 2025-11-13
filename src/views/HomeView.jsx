@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext'
 import SearchBar from '../components/SearchBar/SearchBar'
 import { useLocationData } from '../contexts/LocationDataContext'
 import { useTheme } from '../contexts/ThemeContext'
+import { Link } from 'react-router-dom'
 
 import { LineChart, areaElementClasses} from '@mui/x-charts/LineChart'
 import Radio from '@mui/material/Radio';
@@ -14,9 +15,10 @@ import FormLabel from '@mui/material/FormLabel';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon  from '@mui/icons-material/FavoriteBorder'
-import { Drawer } from '@mui/material'
+import { Alert, Dialog, DialogContent, Drawer } from '@mui/material'
 import { axisClasses } from '@mui/x-charts'
 import { percentFormatter, priceFormatter } from '../utils/formatters'
+import Popup from '../components/Popup/Popup'
 
 
 
@@ -25,6 +27,10 @@ const HomeView = () => {
   const { user, isAuthenticated } = useAuth();
   const {tempCountyNameMap, tempCountyData, getFormattedData, compareCountyList, assignCompareCounty, removeCompareCounty, checkFavorited} = useLocationData();
   const { darkMode, toggleTheme } = useTheme();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [popupSeverity, setPopupSeverity] = useState('info');
+  const [maxFavoritesPopupOpen, setMaxFavoritesPopupOpen] = useState(false);
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -32,12 +38,26 @@ const HomeView = () => {
 
   const handleToggleFavorite = () => {
     if (!isAuthenticated) {
-      alert('Please log in to manage favorites.');
+      handleShowPopup(
+        (
+          <div>
+            Please <Link to="/login">log in</Link> or <Link to='/register'>register</Link> to manage favorites.
+          </div>
+        ),
+        'info'
+      )
       return;
     }
     if (!checkFavorited(tempCountyNameMap.fips_id)) {
       if (compareCountyList.length >= 3) {
-        alert('You can only compare up to 3 counties.');
+        handleShowPopup(
+          (
+            <div>
+              You can only compare up to 3 counties.
+            </div>
+          ),
+          'warning'
+        )
         return;
       }
       assignCompareCounty(tempCountyNameMap.fips_id, tempCountyNameMap.county_name);
@@ -57,6 +77,18 @@ const HomeView = () => {
 
   const [selectedValue, setSelectedValue] = useState(availableMetrics[0].value);
 
+  const handleShowPopup = (message, severity) => {
+    setPopupMessage(message);
+    setPopupSeverity(severity);
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setPopupMessage('');
+    setPopupSeverity('info');
+  };
+
   function getValueFormatter() {
     if (selectedValue === 'active_listing_count_yy')
       return percentFormatter
@@ -64,36 +96,6 @@ const HomeView = () => {
       return priceFormatter
     return undefined
   }
-  // const GradientComponent = () => {
-  //   const {
-  //     top,
-  //     bottom,
-  //     height
-  //   } = useDrawingArea();
-  //   const svgHeight = top + bottom + height;
-
-  //   return ( 
-  //     <defs>
-  //     <linearGradient 
-  //     id = "myGradient"
-  //     x1 = "0"
-  //     y1 = "0"
-  //     x2 = "0"
-  //     y2 = {`${svgHeight}px`}
-  //     gradientUnits = "userSpaceOnUse" >
-  //     <
-  //     stop offset = "0%"
-  //     stopColor = "#B519EC"
-  //     stopOpacity = "0.4" / >
-  //     <
-  //     stop offset = "100%"
-  //     stopColor = "#B519EC"
-  //     stopOpacity = "0" / >
-  //     </linearGradient> 
-  //     </defs>
-  //   );
-  // };
-
 
   return (
     <div>
@@ -161,6 +163,17 @@ const HomeView = () => {
                 <IconButton onClick={handleToggleFavorite} className='favoriteBtn'>
                   {isAuthenticated && checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon style={{color: darkMode ? '#ff3779ff' : '#ff004cff'}}/> : <FavoriteBorderIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/>}
                 </IconButton>
+                <Dialog
+                open={isPopupOpen}
+                onClose={handleClosePopup}
+                aria-describedby="alert-dialog-description"
+                >
+                  <DialogContent>
+                    <Alert severity={popupSeverity}>
+                      {popupMessage}
+                    </Alert>
+                  </DialogContent>
+                </Dialog>
               </div>
 
               <div className='individualCountyChart'>

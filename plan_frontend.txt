@@ -1,3 +1,2 @@
 frontend:
-- check admin restriction
 - change darkmode from navbar to app level
