@@ -60,9 +60,8 @@
 }
 
 .userForm button:hover {
-  color: white;
-  background: var(--default-button-color);
-  /* border: 2px solid white; */
+  color: var(--secondary-bg);
+  background-image: linear-gradient(rgb(79, 153, 228), var(--title-color)) ;
   cursor: pointer;
   
   /* filter: drop-shadow(0 0 2em #61dafbaa); */

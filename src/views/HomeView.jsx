@@ -159,7 +159,7 @@ const HomeView = () => {
                 <h2> {tempCountyNameMap.county_name} </h2>
                 {/* <p> (FIPS: {tempCountyNameMap.fips_id}) </p> */}
                 <IconButton onClick={handleToggleFavorite} className='favoriteBtn'>
-                  {checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon style={{color: darkMode ? '#ff3779ff' : '#ff004cff'}}/> : <FavoriteBorderIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/>}
+                  {isAuthenticated && checkFavorited(tempCountyNameMap.fips_id) ? <FavoriteIcon style={{color: darkMode ? '#ff3779ff' : '#ff004cff'}}/> : <FavoriteBorderIcon style={{color: darkMode ? '#ffffff' : '#000000'}}/>}
                 </IconButton>
               </div>
 
@@ -179,7 +179,7 @@ const HomeView = () => {
                       {
                         dataKey: selectedValue,
                         label: availableMetrics.find(option => option.value === selectedValue)?.label,
-                        color: darkMode ? '#00e1ff' : 'blue',
+                        color: darkMode ? '#00e1ff' : '#3b48d7ff',
                         showMark: false,
                         valueFormatter: getValueFormatter(),
                         area: true,
@@ -220,7 +220,7 @@ const HomeView = () => {
                 >
                   <defs>
                     <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stopColor= {darkMode ? "#00bbffff" : "#4652ffff"} stopOpacity={1}/>
+                      <stop offset="0%" stopColor= {darkMode ? "#00bbffff" : "#468affff"} stopOpacity={1}/>
                       <stop offset="100%" stopColor="var(--primary-bg)" stopOpacity={1}/>
                     </linearGradient>
                   </defs>

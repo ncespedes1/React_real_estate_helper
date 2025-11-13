@@ -83,17 +83,15 @@
 
 .update-button:hover {
   
-  color: var(--title-color);
-  background: var(--primary-bg);
-  border: 2px solid var(--title-color);
-  
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  color: white;
+  background-image: linear-gradient(rgb(79, 153, 228), var(--title-color)) ;
+  cursor: pointer;
 }
 
 .delete-button:hover {
 
-  color: red;
-  background: var(--primary-bg);
-  border: 2px solid red;
-  filter: drop-shadow(0 0 2em #fb6197aa);
+  color: white;
+  background-image: linear-gradient(rgb(233, 0, 47), rgb(152, 0, 41) );
+/* 
+  filter: drop-shadow(0 0 2em #fb6197aa); */
 }

@@ -4,7 +4,7 @@ import { useLocationData } from '../contexts/LocationDataContext'
 import { useTheme } from '../contexts/ThemeContext'
 import ThemeSwitch from '../components/ThemeSwitch'
 
-import { LineChart } from '@mui/x-charts/LineChart'
+import { LineChart, areaElementClasses } from '@mui/x-charts/LineChart'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -84,7 +84,7 @@ const CompareListView = () => {
       dataKey: fips_id,
       label: formatCountyName(compareCountyList.find(c => c.fips_id === fips_id)?.county_name || fips_id),
       showMark: false,
-      valueFormatter: getValueFormatter()
+      valueFormatter: getValueFormatter(),
       // area: true,
     }))
   ), [favoritesData, compareCountyList, getValueFormatter]);
@@ -161,35 +161,28 @@ const CompareListView = () => {
               ]}
               series={series}
               // colors={darkMode ? [ '#00e1ff', '#ff7300', '#ff00f6'] : ['blue', '#ff7300', '#ff00f6']}
-              colors={darkMode ? [ '#00e1ff', '#ff7300', '#ffae00ff'] : ['blue', '#ff7300ff', '#ffae00ff']}
-              // colors={darkMode ? [ '#00e1ff', '#ffbb00ff', '#5d68fdff'] : ['blue', '#ffae00ff', '#8c00ffff']}
+              colors={darkMode ? [ '#00e1ff', '#ff7300', '#ffae00ff'] : ['#0d47d8ff', '#ff7300ff', '#ffae00ff']}
 
 
-              // sx={() => ({
-
-              //   [`& .${axisClasses.tickLabel}`]: {
-              //     fill: darkMode ? '#ffffff' : '#000000',
-              //   },
-              //   [`& .${axisClasses.tick}, & .${axisClasses.line}`]: {
-              //     stroke: darkMode ? '#bbbbbbff' : '#000000', 
-              //   }
-                
-              // })}
               sx={{
 
-                // Change color of the x-axis line
+                // Change color of the axis line
                 '& .MuiChartsAxis-root .MuiChartsAxis-line': {
                   stroke: darkMode ? '#bbbbbbff' : '#000000',
                 },
-                // Change color of x-axis ticks
+                // Change color of axis ticks
                 '& .MuiChartsAxis-root .MuiChartsAxis-tick': {
                   stroke: darkMode ? '#bbbbbbff' : '#000000',
                 },
-                // Change color of x-axis tick labels
+                // Change color of axis tick labels
                 '& .MuiChartsAxis-root .MuiChartsAxis-tickLabel': {
                   fill: darkMode ? '#e3e3e3ff' : '#000000',
                 },
-                
+                [`& .${areaElementClasses.root}`]: {
+                  fill: selectedValue === "active_listing_count_yy" ? "none" : "url(#mergedAreaGradient)",
+                  filter: 'none'
+                },
+
               }}
 
               
@@ -204,7 +197,14 @@ const CompareListView = () => {
               height={300}
               width={800}
               tooltip={{ trigger: 'axis' }}
-            />
+            >
+              <defs>
+                <linearGradient id="mergedAreaGradient" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor= {darkMode ? [ '#00bbffff', '#ff7300', '#ffae00ff'] : ['#468affff', '#ff7300ff', '#ffae00ff']} stopOpacity={1}/>
+                  <stop offset="100%" stopColor="var(--primary-bg)" stopOpacity={1}/>
+                </linearGradient>
+              </defs>
+            </LineChart>
           </div>
           
 
@@ -218,17 +218,18 @@ const CompareListView = () => {
                   scaleType: 'time',
                   valueFormatter: (date) => date.toLocaleDateString(),
 
-                    }]}
+                }]}
                 yAxis={[
-                      { valueFormatter: getValueFormatter() }
-                    ]}
+                  { valueFormatter: getValueFormatter() }
+                ]}
                 series={[
                   {
                     dataKey: selectedValue,
                     label: formatCountyName(compareCountyList.find(county => county.fips_id === fips_id).county_name),
-                    color: darkMode ? '#00e1ff' : 'blue',
+                    color: darkMode ? '#00e1ff' : '#3b48d7ff',
                     showMark: false,
-                    valueFormatter: getValueFormatter()
+                    valueFormatter: getValueFormatter(),
+                    area: true,
                   },
                 ]}
                 sx={{
@@ -244,6 +245,11 @@ const CompareListView = () => {
                   '& .MuiChartsAxis-root .MuiChartsAxis-tickLabel': {
                     fill: darkMode ? '#e3e3e3ff' : '#000000',
                   },
+                  [`& .${areaElementClasses.root}`]: {
+                    fill: selectedValue === "active_listing_count_yy" ? "none" : "url(#areaGradient)",
+                    filter: 'none'
+                  },
+                  
                 }}
 
                 slotProps={{
@@ -256,7 +262,15 @@ const CompareListView = () => {
 
                 height={300}
                 width={800}
-              />
+              >
+                <defs>
+                  <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor= {darkMode ? "#00bbffff" : "#468affff"} stopOpacity={1}/>
+                    <stop offset="100%" stopColor="var(--primary-bg)" stopOpacity={1}/>
+                  </linearGradient>
+                </defs>
+
+              </LineChart>
               
               <IconButton onClick={() => removeFavorite(fips_id)} className='favoriteBtn' >
                 <FavoriteIcon style={{color: darkMode ? '#ff3779ff' : '#ff004cff'}}/>
