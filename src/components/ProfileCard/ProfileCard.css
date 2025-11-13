@@ -92,6 +92,6 @@
 
   color: white;
   background-image: linear-gradient(rgb(233, 0, 47), rgb(152, 0, 41) );
-/* 
-  filter: drop-shadow(0 0 2em #fb6197aa); */
+  cursor: pointer;
+
 }
